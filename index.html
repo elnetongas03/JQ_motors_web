@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JQ Motors | Refacciones & Servicio</title>
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style/main.css" />
+
+  <!-- Ícono -->
+  <link rel="icon" type="image/png" href="images/logo/logo.png" />
+</head>
+<body>
+
+  <!-- 🔧 Header / Menú tipo Bajaj -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/logo/logo.png" alt="JQ Motors Logo">
+      <h1>JQ Motors</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#promociones">Promociones</a></li>
+        <li><a href="#recuerdos">Pizarrón del recuerdo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 🌅 Slider de Promociones -->
+  <section id="inicio" class="slider">
+    <div class="slide fade">
+      <img src="images/portada/slide1.jpg" alt="Promoción 1">
+      <div class="text">🔥 Promociones en refacciones originales Bajaj</div>
+    </div>
+    <div class="slide fade">
+      <img src="images/portada/slide2.jpg" alt="Promoción 2">
+      <div class="text">💥 Servicio especializado JQ Motors</div>
+    </div>
+    <div class="slide fade">
+      <img src="images/portada/slide3.jpg" alt="Promoción 3">
+      <div class="text">🏍️ Calidad y confianza en cada pieza</div>
+    </div>
+  </section>
+
+  <!-- 📖 Catálogo -->
+  <section id="catalogo" class="catalogo">
+    <h2>Catálogo de Refacciones</h2>
+    <input type="text" id="buscador" placeholder="Buscar código o descripción..." />
+    <div id="lista-catalogo">
+      <!-- Aquí se cargan los productos desde catalogo.json -->
+    </div>
+  </section>
+
+  <!-- 🖼️ Pizarrón del recuerdo -->
+  <section id="recuerdos" class="pizarron">
+    <h2>Pizarrón del Recuerdo</h2>
+    <div class="fotos">
+      <div class="foto"><img src="images/recuerdos/foto1.jpg" alt="Recuerdo 1"></div>
+      <div class="foto"><img src="images/recuerdos/foto2.jpg" alt="Recuerdo 2"></div>
+      <div class="foto"><img src="images/recuerdos/foto3.jpg" alt="Recuerdo 3"></div>
+    </div>
+  </section>
+
+  <!-- 📍 Mapa -->
+  <section id="contacto" class="contacto">
+    <h2>Contáctanos</h2>
+    <p>Ubicación: Pachuca de Soto, Hidalgo</p>
+    <iframe src="https://maps.app.goo.gl/LiFau18Cen9pPHSL9" width="100%" height="300" style="border:0;" loading="lazy"></iframe>
+    <a href="https://wa.me/5217711234567" class="whatsapp-btn">💬 Contactar por WhatsApp</a>
+  </section>
+
+  <!-- ⚙️ Scripts -->
+  <script src="scripts/main.js"></script>
+</body>
+</html>
