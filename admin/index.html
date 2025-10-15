@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | JQ Motors</title>
+  <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+  <header>
+    <h1>⚙️ Panel de Administración - JQ Motors</h1>
+  </header>
+
+  <section id="login-section">
+    <h2>Iniciar sesión</h2>
+    <input type="password" id="password" placeholder="Contraseña">
+    <button id="login-btn">Entrar</button>
+    <p id="login-msg"></p>
+  </section>
+
+  <section id="admin-panel" class="hidden">
+    <h2>Catálogo de Refacciones</h2>
+
+    <div class="actions">
+      <button id="load-btn">📂 Cargar catálogo</button>
+      <button id="save-btn">💾 Guardar cambios (exportar JSON)</button>
+      <button id="add-btn">➕ Agregar producto</button>
+    </div>
+
+    <table id="catalogo-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Imagen</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="help">
+      <p>También puedes <a href="manual.html">descargar/editar manualmente</a> el archivo (respaldo en /data/).</p>
+    </div>
+  </section>
+
+  <script src="scripts/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* ===============================
+   Estilos principales JQ Motors
+   =============================== */
+
+/* --- Configuración base --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f5f6fa;
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* --- Navbar tipo Bajaj --- */
+.navbar {
+  background-color: #0a0a0a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo img { height: 50px; }
+.logo h1 { font-weight: 600; letter-spacing: 1px; color: #fff; }
+nav ul { list-style: none; display: flex; gap: 25px; }
+nav a { text-decoration: none; color: white; font-weight: 600; transition: 0.3s; }
+nav a:hover, nav a.active { color: #2196f3; }
+
+/* --- Slider de promociones --- */
+.slider { position: relative; max-width: 100%; height: 60vh; overflow: hidden; }
+.slide { display: none; position: absolute; width: 100%; height: 100%; }
+.slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(75%); }
+.text {
+  position: absolute; bottom: 30px; left: 50px;
+  color: white; font-size: 1.8rem; font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+.fade { animation: fade 2s; }
+@keyframes fade { from { opacity: 0.3; } to { opacity: 1; } }
+
+/* --- Catálogo --- */
+.catalogo { padding: 50px 30px; max-width: 1100px; margin: auto; }
+.catalogo h2 { color: #0a0a0a; border-left: 5px solid #2196f3; padding-left: 10px; margin-bottom: 20px; }
+.catalogo input { width: 100%; padding: 10px; border: 2px solid #2196f3; border-radius: 8px; font-size: 1rem; margin-bottom: 25px; }
+#lista-catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.producto {
+  background: white; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;
+}
+.producto:hover { transform: translateY(-5px); }
+.producto img { width: 100%; height: 180px; object-fit: cover; }
+.producto h3 { margin: 10px; font-size: 1.1rem; }
+.producto p { margin: 0 10px 10px; color: #555; }
+.producto .precio { margin: 0 10px 15px; font-weight: 700; color: #0a0a0a; }
+
+/* --- Pizarrón del recuerdo --- */
+.pizarron { background-color: #fff; padding: 50px 30px; }
+.pizarron h2 { border-left: 5px solid #2196f3; padding-left: 10px; margin-bottom: 20px; }
+.fotos { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.foto img { width: 250px; height: 180px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+/* --- Contacto y mapa --- */
+.contacto { background-color: #0a0a0a; color: white; text-align: center; padding: 50px 30px; }
+.contacto h2 { color: #2196f3; margin-bottom: 10px; }
+.contacto p { margin-bottom: 20px; font-size: 1rem; }
+.contacto iframe { width: 100%; max-width: 800px; height: 300px; border: none; border-radius: 10px; margin-bottom: 25px; }
+
+/* --- WhatsApp flotante --- */
+.whatsapp-btn {
+  background-color: #25D366; color: white; text-decoration: none;
+  position: fixed; bottom: 25px; right: 25px;
+  font-size: 28px; border-radius: 50%; padding: 15px 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: 0.3s;
+}
+.whatsapp-btn:hover { background-color: #1ebe57; }
+
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+  .navbar { flex-direction: column; align-items: flex-start; padding: 10px 20px; }
+  nav ul { flex-direction: column; width: 100%; gap: 10px; }
+  .slider { height: 40vh; }
+}
