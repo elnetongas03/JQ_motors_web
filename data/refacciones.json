@@ -1,0 +1,6 @@
+[
+  { "codigo": "BAJ-001", "descripcion": "Filtro de aire Pulsar NS200", "precio": 180 },
+  { "codigo": "BAJ-002", "descripcion": "Pastillas de freno delantero", "precio": 250 },
+  { "codigo": "BAJ-003", "descripcion": "Aceite Bajaj 20W50", "precio": 150 },
+  { "codigo": "BAJ-004", "descripcion": "Manubrio deportivo", "precio": 320 }
+]
