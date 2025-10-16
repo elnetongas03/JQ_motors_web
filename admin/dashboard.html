@@ -2,15 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel de Control | JQ Motors</title>
-  <link rel="stylesheet" href="../style/main.css">
+  <title>⚙️ Panel de Administración - JQ Motors</title>
+  <link rel="stylesheet" href="style/admin.css">
 </head>
 <body>
-  <div class="catalogo">
-    <h2>Panel de Edición del Catálogo</h2>
-    <p>Aquí podrás modificar tu archivo <b>catalogo.json</b> manualmente o sustituirlo.</p>
-    <a href="../data/catalogo.json" download>📥 Descargar catálogo actual</a>
-    <p>Para editar el catálogo, abre el archivo en VS Code y agrega o quita productos.</p>
-  </div>
+  <header>
+    <h1>⚙️ Panel de Administración - JQ Motors</h1>
+  </header>
+
+  <!-- 🔐 LOGIN -->
+  <section id="login-section">
+    <h2>Iniciar sesión</h2>
+    <input type="password" id="password" placeholder="••••••">
+    <button id="login-btn">Entrar</button>
+    <p id="login-msg"></p>
+  </section>
+
+  <!-- 🧰 PANEL ADMIN -->
+  <section id="admin-panel" class="hidden">
+    <h2>Catálogo de Refacciones</h2>
+
+    <div class="actions">
+      <button id="load-btn">📂 Cargar catálogo</button>
+      <button id="save-btn">💾 Guardar cambios</button>
+      <button id="add-btn">➕ Agregar producto</button>
+    </div>
+
+    <table id="catalogo-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Imagen</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p class="help">También puedes descargar/editar manualmente el archivo (respaldo en <strong>/data/</strong>).</p>
+  </section>
+
+  <script src="scripts/admin.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 // =============================
 
 // 🔐 Contraseña del panel
-const PASSWORD = "jq2025";
+const PASSWORD = "neto30";
 
 // Elementos del DOM
 const loginSection = document.getElementById("login-section");
