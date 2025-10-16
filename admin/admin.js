@@ -2,7 +2,7 @@ function login() {
   const clave = document.getElementById('clave').value;
   const mensaje = document.getElementById('mensaje');
   
-  if (clave === "jqmotors2025") {
+  if (clave === "neto30") {
     window.location.href = "dashboard.html";
   } else {
     mensaje.textContent = "❌ Clave incorrecta";

@@ -4,9 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de Administración | JQ Motors</title>
-  <link rel="stylesheet" href="style/admin.css">
+  <link rel="stylesheet" href="../style/admin.css">
 </head>
-<body>
+<body><script>
+  const clave = "neto30"; // 🔑 Puedes cambiar esta clave
+  const pass = prompt("Introduce la contraseña de administrador:");
+  if (pass !== clave) {
+    alert("Contraseña incorrecta. Acceso denegado.");
+    window.location.href = "../index.html"; // Te regresa a la página principal
+  }
+</script>
+
   <header>
     <h1>⚙️ Panel de Administración - JQ Motors</h1>
   </header>
@@ -45,6 +53,6 @@
     </div>
   </section>
 
-  <script src="scripts/admin.js"></script>
+  <script src="../scripts/admin.js"></script>
 </body>
 </html>
