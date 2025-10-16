@@ -1,18 +1,20 @@
 import pandas as pd
+import json
 
-# 📂 Ruta del archivo Excel
-excel_path = "data/catalogo.xlsx"
+# Cargar Excel
+excel_file = 'data/catalogo.xlsx'  # Ruta de tu Excel
+df = pd.read_excel(excel_file)
 
-# 📄 Ruta del archivo JSON de salida
-json_path = "data/catalogo.json"
+# Seleccionar columnas que quieres mantener
+columnas = ['codigo', 'descripcion', 'imagen']  # quitar stock
+df = df[columnas]
 
-# 🔁 Leer Excel
-df = pd.read_excel(excel_path)
+# Reemplazar NaN de imagen por un placeholder vacío
+df['imagen'] = df['imagen'].fillna("")
 
-# 🔧 Asegurar que las columnas estén en minúsculas
-df.columns = [c.lower().strip() for c in df.columns]
+# Guardar como JSON
+json_file = 'data/catalogo.json'  # Ruta de salida
+df.to_json(json_file, orient='records', force_ascii=False, indent=4)
 
-# 💾 Exportar a JSON
-df.to_json(json_path, orient="records", force_ascii=False, indent=2)
+print(f"Archivo JSON creado: {json_file}")
 
-print(f"✅ Catálogo exportado correctamente a {json_path}")
