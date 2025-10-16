@@ -29,6 +29,8 @@
         <li><a href="#promociones">Promociones</a></li>
         <li><a href="#recuerdos">Pizarrón</a></li>
         <li><a href="#contacto">Contacto</a></li>
+        <!-- Botón administrador -->
+        <li><button id="admin-btn" class="admin-btn">⚙️ Administrador</button></li>
       </ul>
     </nav>
   </header>
@@ -46,6 +48,23 @@
     <div class="slide fade">
       <img src="images/portada/slide3.jpg" alt="Promoción 3">
       <div class="text">🏍️ Calidad y confianza en cada pieza</div>
+    </div>
+  </section>
+
+  <!-- 💸 Promociones -->
+  <section id="promociones" class="promociones">
+    <h2>Promociones del Mes</h2>
+    <div class="promos">
+      <div class="promo">
+        <img src="images/promos/promo1.jpg" alt="Promo 1">
+        <h3>Servicio Completo Bajaj</h3>
+        <p>Descuento del 20% durante todo octubre.</p>
+      </div>
+      <div class="promo">
+        <img src="images/promos/promo2.jpg" alt="Promo 2">
+        <h3>Refacciones Originales</h3>
+        <p>Compra 3 y llévate la 4ª gratis.</p>
+      </div>
     </div>
   </section>
 
@@ -72,7 +91,7 @@
   <section id="contacto" class="contacto">
     <h2>Contáctanos</h2>
     <p>Ubicación: Pachuca de Soto, Hidalgo</p>
-    <!-- Puedes reemplazar el iframe por la URL de Google Maps embebida correcta -->
+    <!-- Reemplaza el iframe por la URL correcta de Google Maps -->
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     <a id="whatsapp-link" href="https://wa.me/5217711234567" class="whatsapp-btn" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
@@ -80,5 +99,22 @@
 
   <!-- ⚙️ Scripts -->
   <script src="scripts/main.js"></script>
+
+  <!-- 🔐 Acceso al panel de administrador -->
+  <script>
+  const adminBtn = document.getElementById("admin-btn");
+  const CLAVE = "neto30"; // Contraseña del administrador
+
+  adminBtn.addEventListener("click", () => {
+      const pass = prompt("Introduce la contraseña del administrador:");
+      if(pass === CLAVE){
+          // Redirige al panel de administración
+          window.location.href = "admin/dashboard.html";
+      } else {
+          alert("❌ Contraseña incorrecta");
+      }
+  });
+  </script>
+
 </body>
 </html>
