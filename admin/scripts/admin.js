@@ -1,117 +1,100 @@
-// =============================
-// PANEL ADMIN SEGURO - JQ MOTORS
-// =============================
-
-// 🔐 Contraseña del panel
-const PASSWORD = "neto30";
-
-// Elementos del DOM
+// ===============================
+// 🔐 Login básico
+// ===============================
 const loginSection = document.getElementById("login-section");
 const adminPanel = document.getElementById("admin-panel");
 const loginBtn = document.getElementById("login-btn");
+const passwordInput = document.getElementById("password");
 const loginMsg = document.getElementById("login-msg");
-const tableBody = document.querySelector("#catalogo-table tbody");
 
-// Datos del catálogo
-let catalogo = [];
+// Contraseña del panel
+const CLAVE = "neto30"; // Cambia aquí si quieres otra clave
 
-// =============================
-// LOGIN
-// =============================
 loginBtn.addEventListener("click", () => {
-  const pass = document.getElementById("password").value;
-  if (pass === PASSWORD) {
-    loginSection.classList.add("hidden");
+  const pass = passwordInput.value.trim();
+  if (pass === CLAVE) {
+    loginSection.style.display = "none";
     adminPanel.classList.remove("hidden");
   } else {
-    loginMsg.textContent = "Contraseña incorrecta ❌";
+    loginMsg.textContent = "❌ Contraseña incorrecta";
+    loginMsg.style.color = "red";
   }
 });
 
-// =============================
-// CARGAR CATÁLOGO
-// =============================
-document.getElementById("load-btn").addEventListener("click", async () => {
+// ===============================
+// 📦 Funcionalidad del catálogo
+// ===============================
+const loadBtn = document.getElementById("load-btn");
+const saveBtn = document.getElementById("save-btn");
+const addBtn = document.getElementById("add-btn");
+const tableBody = document.querySelector("#catalogo-table tbody");
+
+let catalogo = [];
+
+async function cargarCatalogo() {
   try {
-    const res = await fetch("../catalogo/catalogo.json");
+    const res = await fetch("../data/catalogo.json");
     catalogo = await res.json();
     renderTabla();
-    alert("Catálogo cargado correctamente ✅");
   } catch (err) {
-    alert("Error al cargar catálogo: " + err);
+    alert("⚠️ No se pudo cargar catalogo.json");
+    console.error(err);
   }
-});
+}
 
-// =============================
-// GUARDAR CON RESPALDO
-// =============================
-document.getElementById("save-btn").addEventListener("click", () => {
-  try {
-    // Fecha y hora actual
-    const fecha = new Date();
-    const nombreBackup = `catalogo_${fecha.getFullYear()}-${String(fecha.getMonth()+1).padStart(2,"0")}-${String(fecha.getDate()).padStart(2,"0")}_${String(fecha.getHours()).padStart(2,"0")}-${String(fecha.getMinutes()).padStart(2,"0")}.json`;
-
-    // 1️⃣ Crear archivo de respaldo
-    const backupBlob = new Blob([JSON.stringify(catalogo, null, 2)], { type: "application/json" });
-    const backupUrl = URL.createObjectURL(backupBlob);
-    const backupLink = document.createElement("a");
-    backupLink.href = backupUrl;
-    backupLink.download = nombreBackup;
-    backupLink.click();
-    URL.revokeObjectURL(backupUrl);
-
-    // 2️⃣ Crear archivo actualizado principal
-    const mainBlob = new Blob([JSON.stringify(catalogo, null, 2)], { type: "application/json" });
-    const mainUrl = URL.createObjectURL(mainBlob);
-    const mainLink = document.createElement("a");
-    mainLink.href = mainUrl;
-    mainLink.download = "catalogo.json";
-    mainLink.click();
-    URL.revokeObjectURL(mainUrl);
-
-    alert("✅ Catálogo exportado correctamente.\nSe descargó también una copia de seguridad con la fecha actual.");
-  } catch (error) {
-    alert("❌ Error al guardar el catálogo: " + error);
-  }
-});
-
-// =============================
-// AGREGAR NUEVO PRODUCTO
-// =============================
-document.getElementById("add-btn").addEventListener("click", () => {
-  catalogo.push({ codigo: "", descripcion: "", precio: "", imagen: "" });
-  renderTabla();
-});
-
-// =============================
-// MOSTRAR TABLA
-// =============================
 function renderTabla() {
   tableBody.innerHTML = "";
   catalogo.forEach((item, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><input value="${item.codigo || ''}" onchange="updateCampo(${i}, 'codigo', this.value)"></td>
-      <td><input value="${item.descripcion || ''}" onchange="updateCampo(${i}, 'descripcion', this.value)"></td>
-      <td><input value="${item.precio || ''}" onchange="updateCampo(${i}, 'precio', this.value)"></td>
-      <td><input value="${item.imagen || ''}" onchange="updateCampo(${i}, 'imagen', this.value)"></td>
-      <td><button class="delete-btn" onclick="deleteFila(${i})">🗑</button></td>
+      <td>${item.codigo}</td>
+      <td>${item.descripcion}</td>
+      <td>$${item.precio}</td>
+      <td><img src="${item.imagen || ''}" width="60"></td>
+      <td>
+        <button onclick="editar(${i})">✏️</button>
+        <button onclick="eliminar(${i})">🗑️</button>
+      </td>
     `;
     tableBody.appendChild(row);
   });
 }
 
-// =============================
-// FUNCIONES GLOBALES
-// =============================
-window.updateCampo = function (i, campo, valor) {
-  catalogo[i][campo] = valor;
+addBtn.addEventListener("click", () => {
+  const codigo = prompt("Código del producto:");
+  const descripcion = prompt("Descripción:");
+  const precio = prompt("Precio:");
+  const imagen = prompt("Ruta de imagen (ej: images/recuerdos/foto1.jpg):");
+  if (codigo && descripcion && precio) {
+    catalogo.push({ codigo, descripcion, precio, imagen });
+    renderTabla();
+  }
+});
+
+window.editar = (i) => {
+  const p = catalogo[i];
+  const nuevoCodigo = prompt("Nuevo código:", p.codigo);
+  const nuevaDesc = prompt("Nueva descripción:", p.descripcion);
+  const nuevoPrecio = prompt("Nuevo precio:", p.precio);
+  const nuevaImg = prompt("Nueva imagen:", p.imagen);
+  catalogo[i] = { codigo: nuevoCodigo, descripcion: nuevaDesc, precio: nuevoPrecio, imagen: nuevaImg };
+  renderTabla();
 };
 
-window.deleteFila = function (i) {
+window.eliminar = (i) => {
   if (confirm("¿Eliminar este producto?")) {
     catalogo.splice(i, 1);
     renderTabla();
   }
 };
+
+saveBtn.addEventListener("click", () => {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(catalogo, null, 2));
+  const link = document.createElement("a");
+  link.setAttribute("href", dataStr);
+  link.setAttribute("download", "catalogo.json");
+  link.click();
+});
+
+loadBtn.addEventListener("click", cargarCatalogo);
 
