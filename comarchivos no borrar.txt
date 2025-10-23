@@ -1,0 +1,1 @@
+tree "C:\Users\infob\Desktop\JQ_Motors_web" /f > "C:\Users\infob\Desktop\lista.txt"
