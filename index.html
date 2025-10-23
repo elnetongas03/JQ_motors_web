@@ -25,7 +25,7 @@
     <nav>
       <ul>
         <li><a href="#inicio" class="active">Inicio</a></li>
-        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
         <li><a href="#promociones">Promociones</a></li>
         <li><a href="#recuerdos">Pizarrón</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -36,23 +36,22 @@
   </header>
 
   <!-- 🏍️ Slider de Motos Bajaj -->
-<section id="inicio" class="slider">
-  <div class="slide fade">
-    <img src="images/portada/n250.jpg" alt="Bajaj N250">
-    <div class="text">🏍️ Bajaj N250 — Potencia y diseño moderno</div>
-  </div>
+  <section id="inicio" class="slider">
+    <div class="slide fade">
+      <img src="images/portada/n250.jpg" alt="Bajaj N250">
+      <div class="text">🏍️ Bajaj N250 — Potencia y diseño moderno</div>
+    </div>
 
-  <div class="slide fade">
-    <img src="images/portada/ns200.jpg" alt="Bajaj NS200">
-    <div class="text">⚡ Pulsar NS200 — Agilidad extrema</div>
-  </div>
+    <div class="slide fade">
+      <img src="images/portada/ns200.jpg" alt="Bajaj NS200">
+      <div class="text">⚡ Pulsar NS200 — Agilidad extrema</div>
+    </div>
 
-  <div class="slide fade">
-    <img src="images/portada/dominar400.jpg" alt="Dominar 400">
-    <div class="text">🔥 Dominar 400 — La reina del asfalto</div>
-  </div>
-</section>
-
+    <div class="slide fade">
+      <img src="images/portada/dominar400.jpg" alt="Dominar 400">
+      <div class="text">🔥 Dominar 400 — La reina del asfalto</div>
+    </div>
+  </section>
 
   <!-- 💸 Promociones -->
   <section id="promociones" class="promociones">
@@ -71,15 +70,6 @@
     </div>
   </section>
 
-  <!-- 📖 Catálogo -->
-  <section id="catalogo" class="catalogo">
-  <h2>Catálogo de Refacciones</h2>
-  <input type="text" id="buscador" placeholder="Buscar código o descripción..." />
-  <div id="lista-catalogo">
-    <!-- Aquí se cargan los productos desde catalogo.json -->
-  </div>
-</section>
-
   <!-- 🖼️ Pizarrón del recuerdo -->
   <section id="recuerdos" class="pizarron">
     <h2>Pizarrón del Recuerdo</h2>
@@ -94,7 +84,6 @@
   <section id="contacto" class="contacto">
     <h2>Contáctanos</h2>
     <p>Ubicación: Pachuca de Soto, Hidalgo</p>
-    <!-- Reemplaza el iframe por la URL correcta de Google Maps -->
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     <a id="whatsapp-link" href="https://wa.me/5217711234567" class="whatsapp-btn" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
@@ -102,21 +91,19 @@
 
   <!-- ⚙️ Scripts -->
   <script src="scripts/main.js"></script>
-  <script src="scripts/catalogo.js"></script>
 
   <!-- 🔐 Acceso al panel de administrador -->
   <script>
   const adminBtn = document.getElementById("admin-btn");
-  const CLAVE = "neto30"; // Contraseña del administrador
+  const CLAVE = "neto30";
 
   adminBtn.addEventListener("click", () => {
-      const pass = prompt("Introduce la contraseña del administrador:");
-      if(pass === CLAVE){
-          // Redirige al panel de administración
-          window.location.href = "admin/dashboard.html";
-      } else {
-          alert("❌ Contraseña incorrecta");
-      }
+    const pass = prompt("Introduce la contraseña del administrador:");
+    if (pass === CLAVE) {
+      window.location.href = "admin/dashboard.html";
+    } else {
+      alert("❌ Contraseña incorrecta");
+    }
   });
   </script>
 
