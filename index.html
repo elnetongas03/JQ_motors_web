@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- 🔧 Header / Menú tipo Bajaj -->
+  <!-- 🔧 Header / Menú principal -->
   <header class="navbar">
     <div class="logo">
       <img src="images/logo/logo.png" alt="JQ Motors Logo">
@@ -29,13 +29,12 @@
         <li><a href="#promociones">Promociones</a></li>
         <li><a href="#recuerdos">Pizarrón</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <!-- Botón administrador -->
         <li><button id="admin-btn" class="admin-btn">⚙️ Administrador</button></li>
       </ul>
     </nav>
   </header>
 
-  <!-- 🏍️ Slider de Motos Bajaj -->
+  <!-- 🏍️ Slider principal -->
   <section id="inicio" class="slider">
     <div class="slide fade">
       <img src="images/portada/n250.jpg" alt="Bajaj N250">
@@ -54,58 +53,4 @@
   </section>
 
   <!-- 💸 Promociones -->
-  <section id="promociones" class="promociones">
-    <h2>Promociones del Mes</h2>
-    <div class="promos">
-      <div class="promo">
-        <img src="images/promos/promo1.jpg" alt="Promo 1">
-        <h3>Servicio Completo Bajaj</h3>
-        <p>Descuento del 20% durante todo octubre.</p>
-      </div>
-      <div class="promo">
-        <img src="images/promos/promo2.jpg" alt="Promo 2">
-        <h3>Refacciones Originales</h3>
-        <p>Compra 3 y llévate la 4ª gratis.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 🖼️ Pizarrón del recuerdo -->
-  <section id="recuerdos" class="pizarron">
-    <h2>Pizarrón del Recuerdo</h2>
-    <div class="fotos">
-      <div class="foto"><img src="images/recuerdos/foto1.jpg" alt="Recuerdo 1"></div>
-      <div class="foto"><img src="images/recuerdos/foto2.jpg" alt="Recuerdo 2"></div>
-      <div class="foto"><img src="images/recuerdos/foto3.jpg" alt="Recuerdo 3"></div>
-    </div>
-  </section>
-
-  <!-- 📍 Mapa y contacto -->
-  <section id="contacto" class="contacto">
-    <h2>Contáctanos</h2>
-    <p>Ubicación: Pachuca de Soto, Hidalgo</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="300" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-    <a id="whatsapp-link" href="https://wa.me/5217711234567" class="whatsapp-btn" target="_blank" rel="noopener">💬 Contactar por WhatsApp</a>
-  </section>
-
-  <!-- ⚙️ Scripts -->
-  <script src="scripts/main.js"></script>
-
-  <!-- 🔐 Acceso al panel de administrador -->
-  <script>
-  const adminBtn = document.getElementById("admin-btn");
-  const CLAVE = "neto30";
-
-  adminBtn.addEventListener("click", () => {
-    const pass = prompt("Introduce la contraseña del administrador:");
-    if (pass === CLAVE) {
-      window.location.href = "admin/dashboard.html";
-    } else {
-      alert("❌ Contraseña incorrecta");
-    }
-  });
-  </script>
-
-</body>
-</html>
+  <section id="promociones" class=
