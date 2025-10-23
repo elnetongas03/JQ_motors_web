@@ -1,3 +1,7 @@
+/* ============================= */
+/*          ESTILOS GENERALES     */
+/* ============================= */
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -6,7 +10,10 @@ body {
   scroll-behavior: smooth;
 }
 
-/* NAVBAR */
+/* ============================= */
+/*          NAVBAR                */
+/* ============================= */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -54,11 +61,14 @@ body {
   border-bottom: 2px solid #fff;
 }
 
-/* SLIDER */
+/* ============================= */
+/*          SLIDER                */
+/* ============================= */
+
 .slider {
   position: relative;
   width: 100%;
-  height: 25vh;
+  height: 30vh;
   overflow: hidden;
 }
 
@@ -92,7 +102,10 @@ body {
   color: #fff;
 }
 
-/* CATÁLOGO */
+/* ============================= */
+/*          CATÁLOGO              */
+/* ============================= */
+
 .catalogo {
   padding: 40px 20px;
   text-align: center;
@@ -139,7 +152,69 @@ body {
   margin: 0;
 }
 
-/* PIZARRÓN */
+/* ============================= */
+/*          PROMOCIONES           */
+/* ============================= */
+
+.promociones {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.promociones h2 {
+  margin-bottom: 30px;
+}
+
+.promo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.promo-card {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+
+.promo-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.promo-card h3 {
+  color: #fff;
+  margin: 10px 0 5px;
+}
+
+.promo-card p {
+  color: #ccc;
+  margin: 0;
+}
+
+.promo-card .precio {
+  color: #25D366;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* ============================= */
+/*          PIZARRÓN             */
+/* ============================= */
+
 .pizarron {
   background: #222;
   padding: 40px 20px;
@@ -168,7 +243,10 @@ body {
   box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* CONTACTO */
+/* ============================= */
+/*          CONTACTO             */
+/* ============================= */
+
 .contacto {
   padding: 40px 20px;
   text-align: center;
@@ -192,7 +270,10 @@ body {
   background-color: #1EBE57;
 }
 
-/* Responsive */
+/* ============================= */
+/*          RESPONSIVE           */
+/* ============================= */
+
 @media (max-width: 768px) {
   .logo img { height: 40px; }
   .text { left: 12px; right: 12px; bottom: 12px; }
