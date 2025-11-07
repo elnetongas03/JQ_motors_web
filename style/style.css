@@ -1,3 +1,7 @@
+/* ============================ */
+/*        ESTILOS PRINCIPALES   */
+/* ============================ */
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -6,7 +10,9 @@ body {
   scroll-behavior: smooth;
 }
 
-/* NAVBAR */
+/* ============================ */
+/*            NAVBAR            */
+/* ============================ */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -54,11 +60,13 @@ body {
   border-bottom: 2px solid #fff;
 }
 
-/* SLIDER */
+/* ============================ */
+/*            SLIDER            */
+/* ============================ */
 .slider {
   position: relative;
   width: 100%;
-  height: 25vh; /* altura más pequeña */
+  height: 25vh;
   overflow: hidden;
 }
 
@@ -92,7 +100,9 @@ body {
   color: #fff;
 }
 
-/* CATÁLOGO */
+/* ============================ */
+/*           CATÁLOGO           */
+/* ============================ */
 .catalogo {
   padding: 40px 20px;
   text-align: center;
@@ -121,11 +131,12 @@ body {
   padding: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
   text-align: left;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .producto:hover {
   transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
 .producto h3 {
@@ -139,7 +150,74 @@ body {
   margin: 0;
 }
 
-/* PIZARRÓN */
+/* ============================ */
+/*       SIDEBAR CATEGORÍAS     */
+/* ============================ */
+.sidebar {
+  width: 220px;
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #fff;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 12px 0;
+  cursor: pointer;
+  padding: 14px 18px;          /* más grande */
+  border-radius: 10px;
+  text-align: center;
+  background: #7B1E1E;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background: linear-gradient(45deg, #9B2A2A, #C13F3F);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+
+/* Responsive: botones ocupan todo el ancho en móvil */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .sidebar li {
+    flex: 1;
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+/* ============================ */
+/*           PIZARRÓN           */
+/* ============================ */
 .pizarron {
   background: #222;
   padding: 40px 20px;
@@ -168,7 +246,9 @@ body {
   box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* CONTACTO */
+/* ============================ */
+/*           CONTACTO           */
+/* ============================ */
 .contacto {
   padding: 40px 20px;
   text-align: center;
@@ -192,10 +272,18 @@ body {
   background-color: #1EBE57;
 }
 
-/* Responsive */
+/* ============================ */
+/*           RESPONSIVE         */
+/* ============================ */
 @media (max-width: 768px) {
   .logo img { height: 40px; }
   .text { left: 12px; right: 12px; bottom: 12px; }
   #buscador { width: 95%; }
-  .slider { height: 20vh; } /* slider más pequeño en móvil */
+  .slider { height: 20vh; }
+}
+@media(min-width: 1024px) {
+  .sidebar li {
+    font-size: 1.3rem;
+    padding: 16px 20px;
+  }
 }
