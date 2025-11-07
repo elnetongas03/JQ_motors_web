@@ -14,6 +14,9 @@ const imagenCategoria = {
   "otros": "images/catalogo/placeholder.png"
 };
 
+// Guardamos todos los productos globalmente
+let productosGlobal = [];
+
 // Función para mostrar productos
 function mostrarProductos(productos) {
   listaCatalogo.innerHTML = "";
@@ -35,10 +38,21 @@ function mostrarProductos(productos) {
   });
 }
 
+// Función para filtrar por categoría
+function filtrarPorCategoria(categoria) {
+  if(categoria === "Todos") {
+    mostrarProductos(productosGlobal);
+  } else {
+    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
+    mostrarProductos(filtrados);
+  }
+}
+
 // Cargar datos desde JSON
 fetch(urlCatalogo)
   .then(res => res.json())
   .then(data => {
+    productosGlobal = data;
     mostrarProductos(data);
 
     // Buscador
@@ -46,13 +60,24 @@ fetch(urlCatalogo)
     if(buscador){
       buscador.addEventListener("input", () => {
         const texto = buscador.value.toLowerCase();
-        const filtrados = data.filter(p =>
+        const filtrados = productosGlobal.filter(p =>
           p.codigo.toLowerCase().includes(texto) ||
           p.descripcion.toLowerCase().includes(texto)
         );
         mostrarProductos(filtrados);
       });
     }
+
+    // Botones de categoría
+    const categorias = document.querySelectorAll(".sidebar li");
+    categorias.forEach(btn => {
+      btn.addEventListener("click", () => {
+        categorias.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const cat = btn.dataset.categoria; // asumimos que cada <li> tiene data-categoria
+        filtrarPorCategoria(cat);
+      });
+    });
   })
   .catch(err => {
     console.warn("No se pudo cargar catalogo.json, usando datos internos", err);
@@ -60,18 +85,6 @@ fetch(urlCatalogo)
     const dataInterna = [
       {"codigo":"001","descripcion":"Producto de ejemplo","categoria":"otros","imagen":""}
     ];
+    productosGlobal = dataInterna;
     mostrarProductos(dataInterna);
-
-    // Buscador con datos internos
-    const buscador = document.getElementById("buscador");
-    if(buscador){
-      buscador.addEventListener("input", () => {
-        const texto = buscador.value.toLowerCase();
-        const filtrados = dataInterna.filter(p =>
-          p.codigo.toLowerCase().includes(texto) ||
-          p.descripcion.toLowerCase().includes(texto)
-        );
-        mostrarProductos(filtrados);
-      });
-    }
   });
