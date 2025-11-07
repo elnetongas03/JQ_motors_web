@@ -1,153 +1,165 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><link rel="stylesheet" href="style/main.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JQ Motors | Catálogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style/main.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JQ Motors | Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
 
-<style>
-  body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
-  h1 { text-align:center; margin:20px 0; }
+  <style>
+    body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
+    h1 { text-align:center; margin:20px 0; }
 
-  /* Layout */
-  .container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
+    /* Layout */
+    .container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
 
-  .sidebar {
-    width:200px;
-    background:#222;
-    padding:15px;
-    border-radius:10px;
-    max-height:80vh;        /* Barra lateral */
-    overflow-y:auto;
-  }
+    .sidebar {
+      width:200px;
+      background:#222;
+      padding:15px;
+      border-radius:10px;
+      max-height:80vh;
+      overflow-y:auto;
+    }
 
-  .sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
-  .sidebar ul { list-style:none; padding:0; }
-  .sidebar li {
-    margin:10px 0;
-    cursor:pointer;
-    padding:8px;
-    border-radius:5px;
-    text-align:center;
-    background:#7B1E1E;
-    font-weight:600;
-  }
-  .sidebar li:hover,
-  .sidebar li.active { background:#9B2A2A; }
+    .sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
+    .sidebar ul { list-style:none; padding:0; }
 
-  .productos {
-    flex:1;
-    display:grid;
-    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-    gap:20px;
-  }
+    .sidebar li {
+      margin:10px 0;
+      cursor:pointer;
+      padding:8px;
+      border-radius:5px;
+      text-align:center;
+      background:#7B1E1E;
+      font-weight:600;
+    }
+    .sidebar li:hover,
+    .sidebar li.active { background:#9B2A2A; }
 
-  .producto {
-    background:#222;
-    border-radius:10px;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 0 10px rgba(0,0,0,0.4);
-    transition: transform .3s, box-shadow .3s;
-  }
-  .producto:hover {
-    transform:translateY(-5px);
-    box-shadow:0 0 20px rgba(0,0,0,0.7);
-  }
-  .producto img {
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:5px;
-  }
+    .productos {
+      flex:1;
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap:20px;
+    }
 
-  @media(max-width:768px) {
-    .container { flex-direction:column; }
-    .sidebar { width:100%; display:flex; justify-content:center; }
-    .sidebar ul { display:flex; gap:10px; }
-    .sidebar li { flex:1; }
-    .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
-  }
-</style>
+    .producto { 
+      background:#222;
+      border-radius:10px;
+      padding:10px;
+      text-align:center;
+      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .producto:hover {
+      transform:translateY(-5px);
+      box-shadow:0 0 20px rgba(0,0,0,0.7);
+    }
+    .producto img {
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:5px;
+    }
+
+    .producto .info { margin-top:10px; }
+    .producto h3 { margin:5px 0; font-size:1.1rem; }
+    .producto p { margin:3px 0; color:#ccc; font-size:0.9rem; }
+
+    @media(max-width:768px) {
+      .container { flex-direction:column; }
+      .sidebar { width:100%; display:flex; justify-content:center; }
+      .sidebar ul { display:flex; gap:10px; }
+      .sidebar li { flex:1; }
+      .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>Catálogo de Refacciones</h1>
+  <h1>Catálogo de Refacciones</h1>
 
-<div class="container">
+  <div class="container">
+    <div class="sidebar">
+      <h2>Categorías</h2>
+      <ul>
+        <li class="active" data-cat="todos">Todos</li>
+        <li data-cat="tornilleria">Tornillería</li>
+        <li data-cat="balatas">Balatas</li>
+        <li data-cat="retenes">Retenes</li>
+        <li data-cat="filtro-aceite">Filtro Aceite</li>
+        <li data-cat="filtro-aire">Filtro Aire</li>
+        <li data-cat="filtro-gasolina">Filtro Gasolina</li>
+        <li data-cat="juntas">Juntas</li>
+        <li data-cat="manijas">Manijas</li>
+      </ul>
+    </div>
 
-  <div class="sidebar">
-    <h2>Categorías</h2>
-    <ul>
-      <li class="active" data-cat="todos">Todos</li>
-      <li data-cat="tornilleria">Tornillería</li>
-      <li data-cat="balatas">Balatas</li>
-      <li data-cat="retenes">Retenes</li>
-      <li data-cat="filtro-aceite">Filtro Aceite</li>
-      <li data-cat="filtro-aire">Filtro Aire</li>
-      <li data-cat="filtro-gasolina">Filtro Gasolina</li>
-      <li data-cat="juntas">Juntas</li>
-      <li data-cat="manijas">Manijas</li>
-    </ul>
+    <div class="productos" id="lista-catalogo"></div>
   </div>
 
-  <div class="productos" id="lista-catalogo"></div>
+  <script>
+    const urlCatalogo = "catalogo/catalogo.json";
+    const listaCatalogo = document.getElementById("lista-catalogo");
+    let productosData = [];
 
-</div>
+    function mostrarProductos(productos) {
+      listaCatalogo.innerHTML = "";
 
-<script>
-const urlCatalogo = "catalogo/catalogo.json";
-const listaCatalogo = document.getElementById("lista-catalogo");
-let productosData = [];
+      productos.forEach(prod => {
+        const imagenRuta = prod.codigo
+          ? `images/catalogo/${prod.codigo}.jpg`
+          : 'images/catalogo/placeholder.png';
 
-// Mostrar tarjetas
-function mostrarProductos(productos) {
-  listaCatalogo.innerHTML = "";
-  productos.forEach(prod => {
-    const card = document.createElement("div");
-    card.className = "producto";
-    card.dataset.categoria = prod.categoria || "otros";
+        let descripcion = prod.descripcion || "";
+        const texto = descripcion.toUpperCase();
 
-    card.innerHTML = `
-      <img src="${prod.imagen ? prod.imagen : 'images/catalogo/placeholder.png'}" alt="${prod.descripcion}">
-      <div class="info">
-        <h3>${prod.codigo}</h3>
-        <p>${prod.descripcion}</p>
-      </div>
-    `;
+        if (texto.includes("BALATA")) descripcion += " | Juego de balatas con alto rendimiento y durabilidad.";
+        else if (texto.includes("FILTRO")) descripcion += " | Filtro de alto flujo para motores Bajaj.";
+        else if (texto.includes("BUJIA")) descripcion += " | Bujía optimizada para mejor combustión.";
+        else if (texto.includes("CADENA")) descripcion += " | Cadena reforzada para uso continuo.";
+        else descripcion += " | Refacción original o compatible para motocicletas JQ Motors.";
 
-    listaCatalogo.appendChild(card);
-  });
-}
+        const card = document.createElement("div");
+        card.className = "producto";
+        card.dataset.categoria = prod.categoria || "otros";
 
-// Cargar JSON
-fetch(urlCatalogo)
-  .then(res => res.json())
-  .then(data => {
-    productosData = data;
-    mostrarProductos(productosData);
-  })
-  .catch(err => console.warn("No se pudo cargar catalogo.json", err));
+        card.innerHTML = `
+          <img src="${imagenRuta}" alt="${descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
+          <div class="info">
+            <h3>${prod.codigo}</h3>
+            <p>${descripcion}</p>
+          </div>
+        `;
 
-// Filtrar
-const botones = document.querySelectorAll(".sidebar li");
-botones.forEach(btn => {
-  btn.addEventListener("click", () => {
-    botones.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const cat = btn.dataset.cat;
-    if (cat === "todos") {
-      mostrarProductos(productosData);
-    } else {
-      mostrarProductos(productosData.filter(p => (p.categoria || "otros") === cat));
+        listaCatalogo.appendChild(card);
+      });
     }
-  });
-});
-</script>
+
+    fetch(urlCatalogo)
+      .then(res => res.json())
+      .then(data => {
+        productosData = data;
+        mostrarProductos(productosData);
+      })
+      .catch(err => console.warn("No se pudo cargar catalogo.json", err));
+
+    const botones = document.querySelectorAll(".sidebar li");
+    botones.forEach(btn => {
+      btn.addEventListener("click", () => {
+        botones.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const cat = btn.dataset.cat;
+
+        if (cat === "todos") mostrarProductos(productosData);
+        else mostrarProductos(productosData.filter(p => (p.categoria || "otros") === cat));
+      });
+    });
+  </script>
 
 </body>
 </html>
