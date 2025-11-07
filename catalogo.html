@@ -12,6 +12,8 @@
     h1 { text-align:center; margin:20px 0; }
 
     .container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
+    
+    /* Sidebar */
     .sidebar {
       width:220px; background:#222; padding:15px; border-radius:10px;
       max-height:80vh; overflow-y:auto;
@@ -19,13 +21,15 @@
     .sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
     .sidebar ul { list-style:none; padding:0; }
     .sidebar li {
-      margin:10px 0; cursor:pointer; padding:8px; border-radius:5px;
+      margin:10px 0; cursor:pointer; padding:10px; border-radius:5px;
       text-align:left; background:#7B1E1E; font-weight:600;
       display:flex; align-items:center; gap:8px;
+      transition: background 0.3s, transform 0.2s;
     }
-    .sidebar li:hover, .sidebar li.active { background:#9B2A2A; }
+    .sidebar li:hover, .sidebar li.active { background:#9B2A2A; transform:scale(1.05); }
     .cat-icon { width:24px; height:24px; }
 
+    /* Productos */
     .productos {
       flex:1; display:grid;
       grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
@@ -42,16 +46,20 @@
     .producto h3 { margin:5px 0; font-size:1.1rem; }
     .producto p { margin:3px 0; color:#ccc; font-size:0.9rem; }
 
+    #buscador {
+      width:90%; max-width:300px; padding:8px; border-radius:5px;
+      border:none; margin:10px auto; display:block; background:#333; color:#eee;
+    }
+
     @media(max-width:768px) {
       .container { flex-direction:column; }
       .sidebar { width:100%; display:flex; justify-content:center; }
-      .sidebar ul { display:flex; gap:10px; }
+      .sidebar ul { display:flex; gap:10px; flex-wrap:wrap; }
       .sidebar li { flex:1; justify-content:center; }
       .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
     }
   </style>
 </head>
-
 <body>
 
 <h1>Catálogo de Refacciones</h1>
@@ -70,6 +78,7 @@
       <li data-cat="juntas"><img src="images/categorias/juntas.png" class="cat-icon">Juntas</li>
       <li data-cat="manijas"><img src="images/categorias/manijas.png" class="cat-icon">Manijas</li>
     </ul>
+    <input type="text" id="buscador" placeholder="Buscar productos...">
   </div>
 
   <div class="productos" id="lista-catalogo"></div>
@@ -78,53 +87,22 @@
 <script>
 const urlCatalogo = "catalogo/catalogo.json";
 const listaCatalogo = document.getElementById("lista-catalogo");
-let productosData = [];
-
-// Imágenes por categoría
-const imagenCategoria = {
-  "tornilleria": "images/categorias/tornilleria.png",
-  "balatas": "images/categorias/balatas.png",
-  "retenes": "images/categorias/retenes.png",
-  "filtro-aceite": "images/categorias/filtro-aceite.png",
-  "filtro-aire": "images/categorias/filtro-aire.png",
-  "filtro-gasolina": "images/categorias/filtro-gasolina.png",
-  "juntas": "images/categorias/juntas.png",
-  "manijas": "images/categorias/manijas.png",
-  "otros": "images/catalogo/placeholder.png"
-};
-
-// Función para descripción automática
-function obtenerDescripcion(prod) {
-  const desc = prod.descripcion || "";
-  const extras = {
-    "BALATA": "Juego de balatas con alto rendimiento y durabilidad.",
-    "FILTRO": "Filtro de alto flujo para motores Bajaj.",
-    "BUJIA": "Bujía optimizada para mejor combustión.",
-    "CADENA": "Cadena reforzada para uso continuo."
-  };
-  for (const key in extras) {
-    if (desc.toUpperCase().includes(key)) return desc + " | " + extras[key];
-  }
-  return desc + " | Refacción original o compatible para motocicletas JQ Motors.";
-}
+const buscador = document.getElementById("buscador");
+let catalogoData = {};
+let productosActuales = []; // productos filtrados según categoría
 
 // Mostrar productos
 function mostrarProductos(productos) {
   listaCatalogo.innerHTML = "";
   productos.forEach(prod => {
-    const rutaImagen = prod.codigo 
-      ? `images/catalogo/${prod.codigo}.jpg`
-      : (imagenCategoria[prod.categoria] || imagenCategoria["otros"]);
-
+    const rutaImagen = prod.imagen || "images/catalogo/placeholder.png";
     const card = document.createElement("div");
     card.className = "producto";
-    card.dataset.categoria = prod.categoria || "otros";
-
     card.innerHTML = `
       <img src="${rutaImagen}" alt="${prod.descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
       <div class="info">
         <h3>${prod.codigo}</h3>
-        <p>${obtenerDescripcion(prod)}</p>
+        <p>${prod.descripcion}</p>
       </div>
     `;
     listaCatalogo.appendChild(card);
@@ -135,8 +113,12 @@ function mostrarProductos(productos) {
 fetch(urlCatalogo)
   .then(res => res.json())
   .then(data => {
-    productosData = data;
-    mostrarProductos(productosData);
+    catalogoData = data;
+    // Mostrar todos inicialmente
+    let todos = [];
+    for (let cat in catalogoData) todos = todos.concat(catalogoData[cat]);
+    productosActuales = todos;
+    mostrarProductos(productosActuales);
   })
   .catch(err => console.warn("No se pudo cargar catalogo.json", err));
 
@@ -148,9 +130,26 @@ botones.forEach(btn => {
     btn.classList.add("active");
 
     const cat = btn.dataset.cat;
-    if (cat === "todos") mostrarProductos(productosData);
-    else mostrarProductos(productosData.filter(p => (p.categoria || "otros") === cat));
+    if (cat === "todos") {
+      let todos = [];
+      for (let c in catalogoData) todos = todos.concat(catalogoData[c]);
+      productosActuales = todos;
+    } else {
+      productosActuales = catalogoData[cat] || [];
+    }
+    mostrarProductos(productosActuales);
+    buscador.value = ""; // limpiar búsqueda al cambiar categoría
   });
+});
+
+// Filtrar por buscador
+buscador.addEventListener("input", () => {
+  const texto = buscador.value.toLowerCase();
+  const filtrados = productosActuales.filter(p =>
+    p.codigo.toLowerCase().includes(texto) ||
+    p.descripcion.toLowerCase().includes(texto)
+  );
+  mostrarProductos(filtrados);
 });
 </script>
 
