@@ -11,64 +11,33 @@
     body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
     h1 { text-align:center; margin:20px 0; }
 
-    /* Layout */
     .container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
-
     .sidebar {
-      width:220px;
-      background:#222;
-      padding:15px;
-      border-radius:10px;
-      max-height:80vh;
-      overflow-y:auto;
+      width:220px; background:#222; padding:15px; border-radius:10px;
+      max-height:80vh; overflow-y:auto;
     }
     .sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
     .sidebar ul { list-style:none; padding:0; }
     .sidebar li {
-      margin:10px 0;
-      cursor:pointer;
-      padding:8px;
-      border-radius:5px;
-      text-align:left;
-      background:#7B1E1E;
-      font-weight:600;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      margin:10px 0; cursor:pointer; padding:8px; border-radius:5px;
+      text-align:left; background:#7B1E1E; font-weight:600;
+      display:flex; align-items:center; gap:8px;
     }
-    .sidebar li:hover,
-    .sidebar li.active { background:#9B2A2A; }
-
-    .cat-icon {
-      width:24px;
-      height:24px;
-    }
+    .sidebar li:hover, .sidebar li.active { background:#9B2A2A; }
+    .cat-icon { width:24px; height:24px; }
 
     .productos {
-      flex:1;
-      display:grid;
+      flex:1; display:grid;
       grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
       gap:20px;
     }
     .producto { 
-      background:#222;
-      border-radius:10px;
-      padding:10px;
-      text-align:center;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      background:#222; border-radius:10px; padding:10px;
+      text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.4);
       transition: transform .3s, box-shadow .3s;
     }
-    .producto:hover {
-      transform:translateY(-5px);
-      box-shadow:0 0 20px rgba(0,0,0,0.7);
-    }
-    .producto img {
-      width:100%;
-      height:180px;
-      object-fit:cover;
-      border-radius:5px;
-      background:#333;
-    }
+    .producto:hover { transform:translateY(-5px); box-shadow:0 0 20px rgba(0,0,0,0.7); }
+    .producto img { width:100%; height:180px; object-fit:cover; border-radius:5px; background:#333; }
     .producto .info { margin-top:10px; }
     .producto h3 { margin:5px 0; font-size:1.1rem; }
     .producto p { margin:3px 0; color:#ccc; font-size:0.9rem; }
@@ -111,18 +80,20 @@ const urlCatalogo = "catalogo/catalogo.json";
 const listaCatalogo = document.getElementById("lista-catalogo");
 let productosData = [];
 
+// Imágenes por categoría
 const imagenCategoria = {
-  "tornilleria": "images/categorias/tornilleria.jpg",
-  "balatas": "images/categorias/balatas.jpg",
-  "retenes": "images/categorias/retenes.jpg",
-  "filtro-aceite": "images/categorias/filtro-aceite.jpg",
-  "filtro-aire": "images/categorias/filtro-aire.jpg",
-  "filtro-gasolina": "images/categorias/filtro-gasolina.jpg",
-  "juntas": "images/categorias/juntas.jpg",
-  "manijas": "images/categorias/manijas.jpg",
+  "tornilleria": "images/categorias/tornilleria.png",
+  "balatas": "images/categorias/balatas.png",
+  "retenes": "images/categorias/retenes.png",
+  "filtro-aceite": "images/categorias/filtro-aceite.png",
+  "filtro-aire": "images/categorias/filtro-aire.png",
+  "filtro-gasolina": "images/categorias/filtro-gasolina.png",
+  "juntas": "images/categorias/juntas.png",
+  "manijas": "images/categorias/manijas.png",
   "otros": "images/catalogo/placeholder.png"
 };
 
+// Función para descripción automática
 function obtenerDescripcion(prod) {
   const desc = prod.descripcion || "";
   const extras = {
@@ -137,6 +108,7 @@ function obtenerDescripcion(prod) {
   return desc + " | Refacción original o compatible para motocicletas JQ Motors.";
 }
 
+// Mostrar productos
 function mostrarProductos(productos) {
   listaCatalogo.innerHTML = "";
   productos.forEach(prod => {
@@ -159,6 +131,7 @@ function mostrarProductos(productos) {
   });
 }
 
+// Cargar JSON
 fetch(urlCatalogo)
   .then(res => res.json())
   .then(data => {
@@ -167,6 +140,7 @@ fetch(urlCatalogo)
   })
   .catch(err => console.warn("No se pudo cargar catalogo.json", err));
 
+// Filtrar por categoría
 const botones = document.querySelectorAll(".sidebar li");
 botones.forEach(btn => {
   btn.addEventListener("click", () => {
