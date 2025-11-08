@@ -1,153 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JQ Motors | Catálogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style/main.css">
-<style>
-body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
-h1 { text-align:center; margin:20px 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>. | Refacciones & Servicio</title>
 
-.container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-/* Sidebar */
-.sidebar { width:220px; background:#222; padding:15px; border-radius:10px; max-height:80vh; overflow-y:auto; }
-.sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
-.sidebar ul { list-style:none; padding:0; }
-.sidebar li {
-  margin:10px 0; cursor:pointer; padding:10px; border-radius:5px;
-  text-align:left; background:#7B1E1E; font-weight:600;
-  display:flex; align-items:center; gap:8px;
-  transition: background 0.3s, transform 0.2s;
-}
-.sidebar li:hover, .sidebar li.active { background:#9B2A2A; transform:scale(1.03); }
-.cat-icon { width:24px; height:24px; }
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style/main.css" />
 
-/* Productos */
-.productos { flex:1; display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
-.producto {
-  background:#333; border-radius:8px; padding:10px; text-align:center;
-  transition: transform .3s, box-shadow .3s; overflow:hidden; display:flex; flex-direction:column;
-}
-.producto:hover { transform:translateY(-5px) scale(1.03); box-shadow:0 0 25px rgba(0,0,0,0.8); }
-.producto img { width:100%; height:180px; object-fit:cover; border-radius:5px; transition: transform .3s; }
-.producto:hover img { transform: scale(1.1); }
-.producto .info { margin-top:10px; }
-.producto h3 { margin:5px 0; font-size:1.1rem; color:#fff; }
-.producto p { font-size:0.9rem; color:#ccc; }
-
-@media(max-width:768px) {
-  .container { flex-direction:column; }
-  .sidebar { width:100%; display:flex; justify-content:center; }
-  .sidebar ul { display:flex; gap:10px; flex-wrap:wrap; }
-  .sidebar li { flex:1; justify-content:center; }
-  .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
-}
-</style>
+  <!-- Ícono -->
+  <link rel="icon" type="image/png" href="images/logo/logo.png" />
 </head>
 <body>
 
-<h1>Catálogo de Refacciones</h1>
+  <!-- 🔧 Header / Menú principal -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/logo/logo.png" alt="JQ Motors Logo">
+      <h1>JQ Motors</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#promociones">Promociones</a></li>
+        <li><a href="#recuerdos">Pizarrón</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><button id="admin-btn" class="admin-btn">⚙️ Administrador</button></li>
+      </ul>
+    </nav>
+  </header>
 
-<div class="container">
-  <div class="sidebar">
-    <h2>Categorías</h2>
-    <ul>
-      <li class="active" data-cat="todos"><img src="images/categorias/todos.png" class="cat-icon">Todos</li>
-      <li data-cat="tornilleria"><img src="images/categorias/tornilleria.png" class="cat-icon">Tornillería</li>
-      <li data-cat="balatas"><img src="images/categorias/balatas.png" class="cat-icon">Balatas</li>
-      <li data-cat="retenes"><img src="images/categorias/retenes.png" class="cat-icon">Retenes</li>
-      <li data-cat="filtro-aceite"><img src="images/categorias/filtro-aceite.png" class="cat-icon">Filtro Aceite</li>
-      <li data-cat="filtro-aire"><img src="images/categorias/filtro-aire.png" class="cat-icon">Filtro Aire</li>
-      <li data-cat="filtro-gasolina"><img src="images/categorias/filtro-gasolina.png" class="cat-icon">Filtro Gasolina</li>
-      <li data-cat="juntas"><img src="images/categorias/juntas.png" class="cat-icon">Juntas</li>
-      <li data-cat="manijas"><img src="images/categorias/manijas.png" class="cat-icon">Manijas</li>
-    </ul>
+  <!-- 🏍️ Slider principal -->
+  <section id="inicio" class="slider">
+    <div class="slide fade">
+      <img src="images/portada/n250.jpg" alt="Bajaj N250">
+      <div class="text">🏍️ Bajaj N250 — Potencia y diseño moderno</div>
+    </div>
+
+    <div class="slide fade">
+      <img src="images/portada/ns200.jpg" alt="Bajaj NS200">
+      <div class="text">⚡ Pulsar NS200 — Agilidad extrema</div>
+    </div>
+
+    <div class="slide fade">
+      <img src="images/portada/dominar400.jpg" alt="Dominar 400">
+      <div class="text">🔥 Dominar 400 — La reina del asfalto</div>
+    </div>
+  </section>
+
+  <!-- 💸 Promociones -->
+  <section id="promociones" class="promociones">
+  <h2>Promociones Especiales</h2>
+  <div class="promo-container">
+    
+    <div class="promo-card">
+      <img src="images/promociones/promo1.jpg" alt="Promo 1">
+      <h3>Descuento en refacciones</h3>
+      <p class="precio">DE $630 A 500 MXN</p>
+    </div>
+
+    <div class="promo-card">
+      <img src="images/promociones/promo2.jpg" alt="Promo 2">
+      <h3>Mantenimiento gratuito</h3>
+      <p>Revisión gratuita por cada compra de moto nueva.</p>
+      <p class="precio">Gratis</p>
+    </div>
+
+    <!-- Agrega más promociones aquí -->
+    <!--
+    <div class="promo-card">
+      <img src="images/promociones/promo3.jpg" alt="Promo 3">
+      <h3>Nombre de promoción</h3>
+      <p>Descripción de la promoción.</p>
+      <p class="precio">$Precio</p>
+    </div>
+    -->
+
   </div>
+</section>
 
-  <div class="productos" id="lista-catalogo">
-    <!-- Productos se mostrarán aquí -->
-  </div>
-</div>
 
-<script>
-const urlCatalogo = "catalogo/catalogo.json";
-let productosData = [];
+  <!-- 📝 Pizarrón / Recuerdos -->
+  <section id="recuerdos" class="pizarron">
+    <h2>Pizarrón</h2>
+    <p>Comparte tus experiencias y fotos con tu Bajaj.</p>
+    <div class="fotos">
+      <!-- Aquí puedes poner imágenes de clientes -->
+      <div class="foto"><img src="images/pizarron/foto1.jpg" alt="Foto 1"></div>
+      <div class="foto"><img src="images/pizarron/foto2.jpg" alt="Foto 2"></div>
+    </div>
+  </section>
 
-// Imágenes por categoría
-const imagenCategoria = {
-  "tornilleria": "images/categorias/tornilleria.png",
-  "balatas": "images/categorias/balatas.png",
-  "retenes": "images/categorias/retenes.png",
-  "filtro-aceite": "images/categorias/filtro-aceite.png",
-  "filtro-aire": "images/categorias/filtro-aire.png",
-  "filtro-gasolina": "images/categorias/filtro-gasolina.png",
-  "juntas": "images/categorias/juntas.png",
-  "manijas": "images/categorias/manijas.png",
-  "otros": "images/catalogo/placeholder.png"
-};
+  <!-- 📞 Contacto -->
+  <section id="contacto" class="contacto">
+    <h2>Contacto</h2>
+    <form id="contact-form">
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <textarea name="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
 
-// Descripción automática
-function obtenerDescripcion(prod) {
-  const desc = prod.descripcion || "";
-  const extras = {
-    "BALATA": "Juego de balatas con alto rendimiento y durabilidad.",
-    "FILTRO": "Filtro de alto flujo para motores Bajaj.",
-    "BUJIA": "Bujía optimizada para mejor combustión.",
-    "CADENA": "Cadena reforzada para uso continuo."
-  };
-  for (const key in extras) {
-    if (desc.toUpperCase().includes(key)) return desc + " | " + extras[key];
-  }
-  return desc + " | Refacción original o compatible para motocicletas JQ Motors.";
-}
-
-// Mostrar productos de una categoría
-function mostrarProductos(productos) {
-  const lista = document.getElementById("lista-catalogo");
-  lista.innerHTML = "";
-  productos.forEach(prod => {
-    const rutaImagen = prod.imagen || (imagenCategoria[prod.categoria] || imagenCategoria["otros"]);
-    const card = document.createElement("div");
-    card.className = "producto";
-    card.innerHTML = `
-      <img src="${rutaImagen}" alt="${prod.descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
-      <div class="info">
-        <h3>${prod.codigo}</h3>
-        <p>${obtenerDescripcion(prod)}</p>
-      </div>
-    `;
-    lista.appendChild(card);
-  });
-}
-
-// Cargar JSON
-fetch(urlCatalogo)
-  .then(res => res.json())
-  .then(data => {
-    productosData = data;
-    mostrarProductos(productosData); // mostrar todos al inicio
-  })
-  .catch(err => console.warn("No se pudo cargar catalogo.json", err));
-
-// Filtrar por categoría al hacer clic en botón
-const botones = document.querySelectorAll(".sidebar li");
-botones.forEach(btn => {
-  btn.addEventListener("click", () => {
-    botones.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const cat = btn.dataset.cat;
-
-    if(cat === "todos"){
-      mostrarProductos(productosData);
-    } else {
-      mostrarProductos(productosData.filter(p => (p.categoria || "otros") === cat));
-    }
-  });
-});
-</script>
+  <!-- 🔗 Script para slider -->
+  <script src="js/slider.js"></script>
 
 </body>
+<!-- 📦 Catálogo -->
+<section class="catalogo">
+  <h2>Catálogo de Refacciones</h2>
+  <div class="container">
+    <!-- Sidebar de categorías -->
+    <div class="sidebar">
+      <h2>Categorías</h2>
+      <ul>
+        <li class="active" data-cat="todos"><img src="images/categorias/todos.png" class="cat-icon">Todos</li>
+        <li data-cat="tornilleria"><img src="images/categorias/tornilleria.png" class="cat-icon">Tornillería</li>
+        <li data-cat="balatas"><img src="images/categorias/balatas.png" class="cat-icon">Balatas</li>
+        <li data-cat="retenes"><img src="images/categorias/retenes.png" class="cat-icon">Retenes</li>
+        <li data-cat="filtro-aceite"><img src="images/categorias/filtro-aceite.png" class="cat-icon">Filtro Aceite</li>
+        <li data-cat="filtro-aire"><img src="images/categorias/filtro-aire.png" class="cat-icon">Filtro Aire</li>
+        <li data-cat="filtro-gasolina"><img src="images/categorias/filtro-gasolina.png" class="cat-icon">Filtro Gasolina</li>
+        <li data-cat="juntas"><img src="images/categorias/juntas.png" class="cat-icon">Juntas</li>
+        <li data-cat="manijas"><img src="images/categorias/manijas.png" class="cat-icon">Manijas</li>
+      </ul>
+    </div>
+
+    <!-- Contenedor principal de productos -->
+    <div class="productos" id="lista-catalogo"></div>
+  </div>
+</section>
+
+<!-- Modal de catálogo -->
+<div id="modalCatalogo" class="modal-catalogo">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitulo">Categoría</h2>
+      <span id="modalCerrar" class="modal-close">&times;</span>
+    </div>
+    <div id="modalProductos" class="modal-productos">
+      <!-- Productos se llenarán aquí dinámicamente -->
+    </div>
+  </div>
+</div>
+<!-- JS del catálogo -->
+<script src="js/catalogo.js"></script>
+
 </html>

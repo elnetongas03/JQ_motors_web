@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JQ Motors | Catálogo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JQ Motors | Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style/main.css">
 
-  <style>
-    body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
-    h1 { text-align:center; margin:20px 0; }
+<style>
+body { margin:0; font-family:'Montserrat', sans-serif; background:#111; color:#eee; }
+h1 { text-align:center; margin:20px 0; }
 
-    .container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
-    
-    /* Sidebar */
-    .sidebar {
-      width:220px; background:#222; padding:15px; border-radius:10px;
-      max-height:80vh; overflow-y:auto;
-    }
-    .sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
-    .sidebar ul { list-style:none; padding:0; }
-    .sidebar li {
-      margin:10px 0; cursor:pointer; padding:10px; border-radius:5px;
-      text-align:left; background:#7B1E1E; font-weight:600;
-      display:flex; align-items:center; gap:8px;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .sidebar li:hover, .sidebar li.active { background:#9B2A2A; transform:scale(1.05); }
-    .cat-icon { width:24px; height:24px; }
+.container { display:flex; max-width:1200px; margin:0 auto; gap:20px; padding:0 10px; }
 
-    /* Productos */
-    .productos {
-      flex:1; display:grid;
-      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-      gap:20px;
-    }
-    .producto { 
-      background:#222; border-radius:10px; padding:10px;
-      text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.4);
-      transition: transform .3s, box-shadow .3s;
-    }
-    .producto:hover { transform:translateY(-5px); box-shadow:0 0 20px rgba(0,0,0,0.7); }
-    .producto img { width:100%; height:180px; object-fit:cover; border-radius:5px; background:#333; }
-    .producto .info { margin-top:10px; }
-    .producto h3 { margin:5px 0; font-size:1.1rem; }
-    .producto p { margin:3px 0; color:#ccc; font-size:0.9rem; }
+/* Sidebar */
+.sidebar {
+  width:220px; background:#222; padding:15px; border-radius:10px;
+  max-height:80vh; overflow-y:auto;
+}
+.sidebar h2 { margin-top:0; font-size:1.2rem; text-align:center; }
+.sidebar ul { list-style:none; padding:0; }
+.sidebar li {
+  margin:10px 0; cursor:pointer; padding:10px; border-radius:5px;
+  text-align:left; background:#7B1E1E; font-weight:600;
+  display:flex; align-items:center; gap:8px;
+  transition: background 0.3s, transform 0.2s;
+}
+.sidebar li:hover, .sidebar li.active { background:#9B2A2A; transform:scale(1.05); }
+.cat-icon { width:24px; height:24px; }
 
-    #buscador {
-      width:90%; max-width:300px; padding:8px; border-radius:5px;
-      border:none; margin:10px auto; display:block; background:#333; color:#eee;
-    }
+/* Productos */
+.productos {
+  flex:1; display:grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+.producto-card { 
+  background:#fff; border-radius:10px; padding:10px;
+  text-align:center; box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.producto-card:hover { transform:scale(1.05); }
+.producto-card img { width:100%; height:180px; object-fit:cover; border-radius:5px; }
+.producto-card .info { margin-top:10px; }
+.producto-card h3 { margin:0; color:#7B1E1E; font-size:1rem; }
+.producto-card p { color:#333; font-size:0.9rem; }
 
-    @media(max-width:768px) {
-      .container { flex-direction:column; }
-      .sidebar { width:100%; display:flex; justify-content:center; }
-      .sidebar ul { display:flex; gap:10px; flex-wrap:wrap; }
-      .sidebar li { flex:1; justify-content:center; }
-      .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
-    }
-  </style>
+#buscador {
+  width:90%; max-width:300px; padding:8px; border-radius:5px;
+  border:none; margin:10px auto; display:block; background:#333; color:#eee;
+}
+
+@media(max-width:768px) {
+  .container { flex-direction:column; }
+  .sidebar { width:100%; display:flex; justify-content:center; }
+  .sidebar ul { display:flex; gap:10px; flex-wrap:wrap; }
+  .sidebar li { flex:1; justify-content:center; }
+  .productos { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+}
+</style>
 </head>
 <body>
 
@@ -85,19 +85,47 @@
 </div>
 
 <script>
-const urlCatalogo = "catalogo/catalogo.json";
 const listaCatalogo = document.getElementById("lista-catalogo");
 const buscador = document.getElementById("buscador");
-let catalogoData = {};
-let productosActuales = []; // productos filtrados según categoría
+
+const catalogoData = {
+  "tornilleria":[
+    {"codigo":"001","descripcion":"Tornillo M8","imagen":"images/catalogo/001.jpg"},
+    {"codigo":"002","descripcion":"Tornillo M10","imagen":"images/catalogo/002.jpg"}
+  ],
+  "balatas":[
+    {"codigo":"003","descripcion":"Balata delantera","imagen":"images/catalogo/003.jpg"}
+  ],
+  "retenes":[
+    {"codigo":"004","descripcion":"Retén de aceite","imagen":"images/catalogo/004.jpg"}
+  ],
+  "filtro-aceite":[
+    {"codigo":"005","descripcion":"Filtro de aceite","imagen":"images/catalogo/005.jpg"}
+  ],
+  "filtro-aire":[
+    {"codigo":"006","descripcion":"Filtro de aire","imagen":"images/catalogo/006.jpg"}
+  ],
+  "filtro-gasolina":[
+    {"codigo":"007","descripcion":"Filtro de gasolina","imagen":"images/catalogo/007.jpg"}
+  ],
+  "juntas":[
+    {"codigo":"008","descripcion":"Junta de motor","imagen":"images/catalogo/008.jpg"}
+  ],
+  "manijas":[
+    {"codigo":"009","descripcion":"Manija de freno","imagen":"images/catalogo/009.jpg"}
+  ],
+  "otros":[]
+};
+
+let productosActuales = [];
 
 // Mostrar productos
-function mostrarProductos(productos) {
+function mostrarProductos(productos){
   listaCatalogo.innerHTML = "";
   productos.forEach(prod => {
-    const rutaImagen = prod.imagen || "images/catalogo/placeholder.png";
     const card = document.createElement("div");
-    card.className = "producto";
+    card.className = "producto-card";
+    const rutaImagen = prod.imagen || "images/catalogo/placeholder.png";
     card.innerHTML = `
       <img src="${rutaImagen}" alt="${prod.descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
       <div class="info">
@@ -109,45 +137,33 @@ function mostrarProductos(productos) {
   });
 }
 
-// Cargar JSON
-fetch(urlCatalogo)
-  .then(res => res.json())
-  .then(data => {
-    catalogoData = data;
-    // Mostrar todos inicialmente
-    let todos = [];
-    for (let cat in catalogoData) todos = todos.concat(catalogoData[cat]);
-    productosActuales = todos;
-    mostrarProductos(productosActuales);
-  })
-  .catch(err => console.warn("No se pudo cargar catalogo.json", err));
+// Inicializar catálogo mostrando todos
+function inicializarCatalogo(){
+  let todos = [];
+  for(let cat in catalogoData) todos = todos.concat(catalogoData[cat]);
+  productosActuales = todos;
+  mostrarProductos(productosActuales);
+}
+inicializarCatalogo();
 
 // Filtrar por categoría
 const botones = document.querySelectorAll(".sidebar li");
-botones.forEach(btn => {
-  btn.addEventListener("click", () => {
-    botones.forEach(b => b.classList.remove("active"));
+botones.forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    botones.forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
-
     const cat = btn.dataset.cat;
-    if (cat === "todos") {
-      let todos = [];
-      for (let c in catalogoData) todos = todos.concat(catalogoData[c]);
-      productosActuales = todos;
-    } else {
-      productosActuales = catalogoData[cat] || [];
-    }
+    productosActuales = cat==="todos" ? Object.values(catalogoData).flat() : catalogoData[cat] || [];
     mostrarProductos(productosActuales);
-    buscador.value = ""; // limpiar búsqueda al cambiar categoría
+    buscador.value = "";
   });
 });
 
 // Filtrar por buscador
-buscador.addEventListener("input", () => {
+buscador.addEventListener("input", ()=>{
   const texto = buscador.value.toLowerCase();
   const filtrados = productosActuales.filter(p =>
-    p.codigo.toLowerCase().includes(texto) ||
-    p.descripcion.toLowerCase().includes(texto)
+    p.codigo.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto)
   );
   mostrarProductos(filtrados);
 });

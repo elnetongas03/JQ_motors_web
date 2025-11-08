@@ -153,6 +153,9 @@ body {
 /* ============================ */
 /*       SIDEBAR CATEGORÍAS     */
 /* ============================ */
+/* ============================ */
+/*       SIDEBAR CATEGORÍAS     */
+/* ============================ */
 .sidebar {
   width: 220px;
   background: #222;
@@ -178,13 +181,16 @@ body {
 .sidebar li {
   margin: 12px 0;
   cursor: pointer;
-  padding: 14px 18px;          /* más grande */
+  padding: 30px 38px;           /* más grande */
   border-radius: 10px;
   text-align: center;
   background: #7B1E1E;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.3rem;            /* texto más grande */
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
@@ -194,6 +200,11 @@ body {
   background: linear-gradient(45deg, #9B2A2A, #C13F3F);
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+
+.cat-icon {
+  width: 40px;      /* ícono más grande */
+  height: 40px;
 }
 
 /* Responsive: botones ocupan todo el ancho en móvil */
@@ -211,9 +222,18 @@ body {
   .sidebar li {
     flex: 1;
     font-size: 1rem;
-    padding: 10px;
+    padding: 12px;
   }
 }
+
+/* Ajustes para pantallas grandes */
+@media(min-width: 1024px) {
+  .sidebar li {
+    font-size: 1.4rem;
+    padding: 20px 24px;
+  }
+}
+
 
 /* ============================ */
 /*           PIZARRÓN           */
@@ -287,3 +307,71 @@ body {
     padding: 16px 20px;
   }
 }
+/* Modal de catálogo */
+.modal-catalogo {
+  display: none; 
+  position: fixed; 
+  z-index: 2000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: #222;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  color: #eee;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.modal-close {
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.modal-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.modal-producto {
+  background:#333;
+  border-radius: 8px;
+  padding:10px;
+  text-align:center;
+}
+
+.modal-producto img {
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:5px;
+}
+
+.modal-producto h4 {
+  margin:8px 0 4px;
+}
+
+.modal-producto p {
+  font-size:0.9rem;
+  color:#ccc;
+}
+

@@ -1,5 +1,10 @@
-const urlCatalogo = "catalogo/catalogo.json"; // JSON
+// =========================
+// catalogo.js
+// =========================
+
+const urlCatalogo = "catalogo/catalogo.json";
 const listaCatalogo = document.getElementById("lista-catalogo");
+let productosData = [];
 
 // Imágenes por categoría
 const imagenCategoria = {
@@ -14,77 +19,115 @@ const imagenCategoria = {
   "otros": "images/catalogo/placeholder.png"
 };
 
-// Guardamos todos los productos globalmente
-let productosGlobal = [];
+// Función para descripción automática
+function obtenerDescripcion(prod) {
+  const desc = prod.descripcion || "";
+  const extras = {
+    "BALATA": "Juego de balatas con alto rendimiento y durabilidad.",
+    "FILTRO": "Filtro de alto flujo para motores Bajaj.",
+    "BUJIA": "Bujía optimizada para mejor combustión.",
+    "CADENA": "Cadena reforzada para uso continuo."
+  };
+  for (const key in extras) {
+    if (desc.toUpperCase().includes(key)) return desc + " | " + extras[key];
+  }
+  return desc + " | Refacción original o compatible para motocicletas JQ Motors.";
+}
 
-// Función para mostrar productos
+// Función para obtener ruta de imagen de un producto
+function getImagenProducto(codigo) {
+  if (!codigo) return imagenCategoria["otros"];
+  return [
+    `images/catalogo/${codigo}.jpg`,
+    `images/catalogo/${codigo}.png`
+  ][0]; // Devuelve la primera; <img onerror> manejará placeholder
+}
+
+// =========================
+// Mostrar productos en la lista principal
+// =========================
 function mostrarProductos(productos) {
   listaCatalogo.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
   productos.forEach(prod => {
-    const rutaImagen = prod.imagen 
-      ? prod.imagen 
-      : (imagenCategoria[prod.categoria] || imagenCategoria["otros"]);
+    const rutaImagen = getImagenProducto(prod.codigo);
 
     const card = document.createElement("div");
-    card.className = "producto-card";
+    card.className = "producto";
     card.innerHTML = `
-      <img src="${rutaImagen}" alt="${prod.descripcion}">
+      <img src="${rutaImagen}" alt="${prod.descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
       <div class="info">
         <h3>${prod.codigo}</h3>
-        <p>${prod.descripcion}</p>
+        <p>${obtenerDescripcion(prod)}</p>
       </div>
     `;
-    listaCatalogo.appendChild(card);
+    fragment.appendChild(card);
   });
+
+  listaCatalogo.appendChild(fragment);
 }
 
-// Función para filtrar por categoría
-function filtrarPorCategoria(categoria) {
-  if(categoria === "Todos") {
-    mostrarProductos(productosGlobal);
-  } else {
-    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
-    mostrarProductos(filtrados);
-  }
+// =========================
+// Modal de categoría
+// =========================
+const modal = document.getElementById("modalCatalogo");
+const modalCerrar = document.getElementById("modalCerrar");
+const modalTitulo = document.getElementById("modalTitulo");
+const modalProductos = document.getElementById("modalProductos");
+
+modalCerrar.onclick = () => modal.style.display = "none";
+window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
+
+function abrirCatalogo(categoria) {
+  modalTitulo.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+  modalProductos.innerHTML = "";
+
+  const productosCat = categoria === "todos" 
+    ? productosData 
+    : productosData.filter(p => (p.categoria || "otros") === categoria);
+
+  productosCat.forEach(prod => {
+    const rutaImagen = getImagenProducto(prod.codigo);
+
+    const card = document.createElement("div");
+    card.className = "modal-producto";
+    card.innerHTML = `
+      <img src="${rutaImagen}" alt="${prod.descripcion}" onerror="this.src='images/catalogo/placeholder.png'">
+      <h4>${prod.codigo}</h4>
+      <p>${prod.descripcion}</p>
+    `;
+    modalProductos.appendChild(card);
+  });
+
+  modal.style.display = "flex";
 }
 
-// Cargar datos desde JSON
+// =========================
+// Eventos de botones de categoría
+// =========================
+const botones = document.querySelectorAll(".sidebar li");
+botones.forEach(btn => {
+  btn.addEventListener("click", () => {
+    botones.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const cat = btn.dataset.cat;
+    abrirCatalogo(cat);
+    mostrarProductos(cat === "todos" 
+      ? productosData 
+      : productosData.filter(p => (p.categoria || "otros") === cat)
+    );
+  });
+});
+
+// =========================
+// Cargar JSON al iniciar
+// =========================
 fetch(urlCatalogo)
   .then(res => res.json())
   .then(data => {
-    productosGlobal = data;
-    mostrarProductos(data);
-
-    // Buscador
-    const buscador = document.getElementById("buscador");
-    if(buscador){
-      buscador.addEventListener("input", () => {
-        const texto = buscador.value.toLowerCase();
-        const filtrados = productosGlobal.filter(p =>
-          p.codigo.toLowerCase().includes(texto) ||
-          p.descripcion.toLowerCase().includes(texto)
-        );
-        mostrarProductos(filtrados);
-      });
-    }
-
-    // Botones de categoría
-    const categorias = document.querySelectorAll(".sidebar li");
-    categorias.forEach(btn => {
-      btn.addEventListener("click", () => {
-        categorias.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const cat = btn.dataset.categoria; // asumimos que cada <li> tiene data-categoria
-        filtrarPorCategoria(cat);
-      });
-    });
+    productosData = data;
+    mostrarProductos(productosData); // Mostrar todos al inicio
   })
-  .catch(err => {
-    console.warn("No se pudo cargar catalogo.json, usando datos internos", err);
-
-    const dataInterna = [
-      {"codigo":"001","descripcion":"Producto de ejemplo","categoria":"otros","imagen":""}
-    ];
-    productosGlobal = dataInterna;
-    mostrarProductos(dataInterna);
-  });
+  .catch(err => console.warn("No se pudo cargar catalogo.json", err));
