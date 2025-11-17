@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JQ Motors | Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#111;
+  --panel:#121212;
+  --card:#1b1b1b;
+  --muted:#cfcfcf;
+  --guinda:#7B1E1E;
+  --guinda-2:#A83434;
+  --shadow:0 6px 18px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg);
+  color:#eee;
+  scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--guinda);
+  padding:10px 18px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo img{
+  height:44px;
+}
+.logo h1{
+  margin:0;
+  font-size:1rem;
+  color:#fff;
+}
+
+/* CATÁLOGO */
+.catalogo{
+  padding:28px 16px;
+}
+.catalogo h2{
+  max-width:1200px;
+  margin:0 auto 12px;
+  color:var(--guinda-2);
+}
+.catalogo .container{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:20px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.sidebar{
+  background:#0f0f0f;
+  padding:16px;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+}
+.sidebar h2{
+  margin:0 0 12px;
+  color:#fff;
+}
+.motos-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:10px;
+}
+.moto-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:rgba(255,255,255,.02);
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:transform .12s,background .12s;
+}
+.moto-item img{
+  width:56px;
+  height:40px;
+  object-fit:cover;
+  border-radius:6px;
+}
+.moto-name{
+  font-weight:600;
+  color:#fff;
+}
+.moto-item:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.04);
+}
+.moto-item.active{
+  outline:2px solid var(--guinda);
+  background:rgba(123,30,30,.06);
+}
+.sidebar input[type="text"]{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:2px solid var(--guinda);
+  outline:none;
+  margin:12px 0 18px;
+  background:#0b0b0b;
+  color:#fff;
+}
+#lista-catalogo{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+  padding:10px;
+}
+.despiece-seccion{
+  background:transparent;
+  padding:6px 0;
+}
+.despiece-seccion h3{
+  margin:0 0 8px;
+  color:var(--guinda-2);
+}
+.despiece-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;
+}
+.pieza{
+  background:var(--card);
+  border-radius:8px;
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.45);
+  transition:transform .15s,box-shadow .15s;
+}
+.pieza img{
+  width:100%;
+  height:120px;
+  object-fit:contain;
+  border-radius:6px;
+  background:#fff;
+  padding:6px;
+}
+.pieza p{
+  margin:8px 0 4px;
+  color:#fff;
+  font-weight:600;
+}
+.pieza small{
+  color:#aaa;
+}
+.pieza:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+/* MODAL */
+.modal-catalogo{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background-color:rgba(0,0,0,.8);
+}
+.modal-content{
+  background:#121212;
+  margin:48px auto;
+  padding:18px;
+  border-radius:10px;
+  max-width:900px;
+  color:#eee;
+  box-shadow:var(--shadow);
+}
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.modal-close{
+  cursor:pointer;
+  font-size:1.4rem;
+  font-weight:700;
+}
+.modal-productos{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:15px;
+  margin-top:16px;
+}
+.modal-producto{
+  background:#1d1d1d;
+  border-radius:8px;
+  padding:10px;
+  text-align:center;
+}
+.modal-producto img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:5px;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .catalogo .container{grid-template-columns:1fr;}
+  .sidebar{order:2;}
+  .moto-item img{width:48px;height:34px;}
+}
+@media (min-width:1200px){
+  #lista-catalogo{
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="images/logo/logo.png" alt="Logo de JQ Motors">
+    <h1>JQ Motors</h1>
+  </div>
+</header>
+
+<section class="catalogo">
+  <h2>Catálogo de Refacciones</h2>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Modelos Bajaj</h2>
+      <input id="buscador" type="text" placeholder="Buscar modelo o pieza...">
+      <ul class="motos-list" id="motos-list"></ul>
+    </aside>
+    <section>
+      <div id="lista-catalogo"></div>
+    </section>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal-catalogo">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modal-titulo">Detalle</h2>
+      <div id="modal-cerrar" class="modal-close">✕</div>
+    </div>
+    <div id="modal-productos" class="modal-productos"></div>
+  </div>
+</div>
+
+<script>
+// ====== JS del catálogo y modal ======
+const motosList      = document.getElementById('motos-list');
+const listaCatalogo   = document.getElementById('lista-catalogo');
+const buscador        = document.getElementById('buscador');
+const modal           = document.getElementById('modal');
+const modalTitulo     = document.getElementById('modal-titulo');
+const modalProductos  = document.getElementById('modal-productos');
+const modalCerrar     = document.getElementById('modal-cerrar');
+
+let datosCatalogo = {};
+
+fetch('catalogo/catalogo.json')
+  .then(r=>r.ok ? r.json() : Promise.reject('Error al cargar catalogo.json'))
+  .then(json=>{ datosCatalogo=json; initCatalogo(); })
+  .catch(err=>{
+    console.error(err);
+    datosCatalogo={
+      "ns-200":{"nombre":"NS 200","secciones":[{"titulo":"Motor","piezas":[{"id":"p1","nombre":"Junta cabeza","img":"images/catalogo/placeholder.png","codigo":"NS200-CAB-01"}]}]},
+      "n250":{"nombre":"N250","secciones":[{"titulo":"Frenos","piezas":[{"id":"p2","nombre":"Disco freno","img":"images/catalogo/placeholder.png","codigo":"N250-DF-01"}]}]}
+    };
+    initCatalogo();
+  });
+
+function initCatalogo(){
+  renderMotosSidebar();
+  const first=document.querySelector('.moto-item');
+  if(first) first.click();
+}
+
+function renderMotosSidebar(){
+  motosList.innerHTML='';
+
+  const liAll=document.createElement('li');
+  liAll.className='moto-item active';
+  liAll.dataset.model='todos';
+  liAll.innerHTML=`<img src="images/portada/slide1.jpg" alt="Todos" onerror="this.src='images/moto-placeholder.png'"><div class="moto-name">Todos</div>`;
+  liAll.addEventListener('click',()=>{ selectMoto(liAll,'todos'); mostrarTodos(); });
+  motosList.appendChild(liAll);
+
+  Object.keys(datosCatalogo).forEach(key=>{
+    const modelo=datosCatalogo[key];
+    const li=document.createElement('li');
+    li.className='moto-item';
+    li.dataset.model=key;
+
+    let imgPath=`images/motos/${key}.jpg`;
+    if(key==='n250') imgPath='images/portada/n250.jpg';
+    if(key.includes('ns')) imgPath='images/portada/ns200.jpg';
+    if(key.toLowerCase().includes('dominar')) imgPath='images/portada/dominar400.jpg';
+
+    li.innerHTML=`<img src="${imgPath}" alt="${modelo.nombre}" onerror="this.src='images/moto-placeholder.png'"><div class="moto-name">${modelo.nombre}</div>`;
+    li.addEventListener('click',()=>{ selectMoto(li,key); mostrarManual(key); });
+    motosList.appendChild(li);
+  });
+}
+
+function selectMoto(el,key){
+  document.querySelectorAll('.moto-item').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  if(window.innerWidth<900) listaCatalogo.scrollIntoView({behavior:'smooth'});
+}
+
+function mostrarTodos(){
+  listaCatalogo.innerHTML='';
+  Object.keys(datosCatalogo).forEach(k=>{
+    const modelo=datosCatalogo[k];
+    modelo.secciones.forEach(sec=>appendSection(k,sec));
+  });
+}
+
+function mostrarManual(modelKey){
+  const data=datosCatalogo[modelKey];
+  if(!data){ listaCatalogo.innerHTML='<p style="color:#bbb">Modelo no encontrado.</p>'; return; }
+  listaCatalogo.innerHTML='';
+  const titulo=document.createElement('div');
+  titulo.className='despiece-seccion';
+  titulo.innerHTML=`<h3>${data.nombre} — Manual de despiece</h3><p style="color:#bbb;margin-top:6px">Selecciona una pieza para ver detalles.</p>`;
+  listaCatalogo.appendChild(titulo);
+  data.secciones.forEach(sec=>appendSection(modelKey,sec));
+}
+
+function appendSection(modelKey,sec){
+  const secWrap=document.createElement('div');
+  secWrap.className='despiece-seccion';
+  secWrap.innerHTML=`<h3>${sec.titulo}</h3>`;
+
+  const grid=document.createElement('div');
+  grid.className='despiece-grid';
+
+  (sec.piezas||[]).forEach(p=>{
+    const pieza=document.createElement('div');
+    pieza.className='pieza';
+    pieza.dataset.id=p.id||(p.codigo||Math.random().toString(36).slice(2));
+    const imgSrc=p.img&&p.img.trim()?p.img:'images/catalogo/placeholder.png';
+    pieza.innerHTML=`<img src="${imgSrc}" alt="${p.nombre}" onerror="this.src='images/catalogo/placeholder.png'"><p>${p.nombre}</p><small>${p.codigo||''}</small>`;
+    pieza.addEventListener('click',()=>abrirModal(modelKey,p.nombre,imgSrc,p.codigo));
+    grid.appendChild(pieza);
+  });
+
+  secWrap.appendChild(grid);
+  listaCatalogo.appendChild(secWrap);
+}
+
+function abrirModal(modelKey,titulo,img,codigo){
+  modalTitulo.textContent=titulo;
+  modalProductos.innerHTML=`<div class="modal-producto"><img src="${img}" alt="${titulo}" onerror="this.src='images/catalogo/placeholder.png'"><p style="margin-top:10px;font-weight:600">${titulo}</p><small style="color:#ccc">${codigo||''}</small></div>`;
+  modal.style.display='block';
+}
+
+modalCerrar.addEventListener('click',()=>{ modal.style.display='none'; });
+window.addEventListener('click',e=>{ if(e.target===modal) modal.style.display='none'; });
+
+buscador.addEventListener('input',e=>{
+  const valor=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.pieza').forEach(card=>{
+    const nombre=card.querySelector('p').textContent.toLowerCase();
+    card.style.display=nombre.includes(valor)?'none':'';
+  });
+});
+</script>
+
+</body>
+</html>
