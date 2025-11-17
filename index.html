@@ -1,101 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>. | Refacciones & Servicio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JQ Motors | Refacciones & Servicio</title>
 
   <!-- Tipografía -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="style/main.css" />
-
-  <!-- Ícono -->
+  <!-- Ícono (opcional) -->
   <link rel="icon" type="image/png" href="images/logo/logo.png" />
-</head>
-<body>
 
-  <!-- 🔧 Header / Menú principal -->
+  <!-- Estilos (todo inline: diseño base + catálogo integrado) -->
+  <style>
+  :root{
+    --bg:#111;
+    --panel:#121212;
+    --card:#1b1b1b;
+    --muted:#cfcfcf;
+    --guinda:#7B1E1E;
+    --guinda-2:#A83434;
+    --shadow:0 6px 18px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Montserrat',sans-serif;background:var(--bg);color:#eee;scroll-behavior:smooth}
+
+  /* NAVBAR */
+  .navbar{display:flex;justify-content:space-between;align-items:center;background:var(--guinda);padding:10px 20px;position:sticky;top:0;z-index:1000}
+  .logo{display:flex;align-items:center}
+  .logo img{height:48px;margin-right:10px}
+  .logo h1{margin:0;font-size:1.05rem;color:#fff}
+  .navbar ul{list-style:none;display:flex;gap:14px;margin:0;padding:0;align-items:center}
+  .navbar a{color:#fff;text-decoration:none;font-weight:600;padding:6px 8px}
+  .navbar a:hover,.navbar a.active{border-bottom:2px solid #fff}
+  .admin-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer}
+
+  /* SLIDER */
+  .slider{position:relative;width:100%;height:32vh;overflow:hidden}
+  .slide{display:none;position:absolute;width:100%;height:100%;animation:fade 1s}
+  @keyframes fade{from{opacity:.4}to{opacity:1}}
+  .slide img{width:100%;height:100%;object-fit:cover}
+  .text{position:absolute;bottom:20px;left:20px;background:rgba(0,0,0,.45);padding:10px 16px;border-radius:8px;color:#fff}
+
+  /* PROMOCIONES */
+  .promociones{padding:32px 16px}
+  .promociones h2{max-width:1200px;margin:0 auto 12px;color:var(--guinda-2)}
+  .promo-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+  .promo-card{background:#121212;border-radius:10px;padding:12px;box-shadow:var(--shadow);text-align:center}
+  .promo-card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+  .promo-card h3{margin:6px 0;color:#fff}
+  .promo-card .precio{color:var(--guinda-2);font-weight:700}
+
+  /* CATALOGO */
+  .catalogo{padding:28px 16px}
+  .catalogo h2{max-width:1200px;margin:0 auto 12px;color:var(--guinda-2)}
+  .catalogo .container{display:grid;grid-template-columns:280px 1fr;gap:20px;max-width:1200px;margin:0 auto}
+  .sidebar{background:#0f0f0f;padding:18px;border-radius:10px;box-shadow:var(--shadow)}
+  .sidebar h2{margin:0 0 12px 0;color:#fff}
+  .motos-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .moto-item{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;cursor:pointer;transition:transform .15s,background .15s}
+  .moto-item img{width:56px;height:40px;object-fit:cover;border-radius:6px}
+  .moto-item .moto-name{font-weight:600;color:#fff}
+  .moto-item:hover{transform:translateY(-3px);background:rgba(255,255,255,0.04)}
+  .moto-item.active{outline:2px solid var(--guinda);background:rgba(123,30,30,0.06)}
+  .sidebar input[type="text"]{width:100%;padding:10px 12px;border-radius:8px;border:2px solid var(--guinda);outline:none;margin:12px 0 18px 0;background:#0b0b0b;color:#fff}
+
+  #lista-catalogo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;padding:10px}
+  .despiece-seccion{background:transparent;padding:6px 0}
+  .despiece-seccion h3{margin:0 0 8px 0;color:var(--guinda-2)}
+  .despiece-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .pieza{background:var(--card);border-radius:8px;padding:10px;text-align:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.5);transition:transform .18s,box-shadow .18s}
+  .pieza img{width:100%;height:120px;object-fit:contain;border-radius:6px;background:#fff;padding:6px}
+  .pieza p{margin:8px 0 4px 0;color:#fff;font-weight:600}
+  .pieza small{color:#aaa}
+  .pieza:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.7)}
+
+  /* MODAL PIEZAS */
+  .modal-catalogo{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.8)}
+  .modal-content{background:#121212;margin:50px auto;padding:18px;border-radius:10px;max-width:900px;color:#eee;box-shadow:var(--shadow)}
+  .modal-header{display:flex;justify-content:space-between;align-items:center}
+  .modal-close{cursor:pointer;font-size:1.4rem;font-weight:700}
+  .modal-productos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin-top:16px}
+  .modal-producto{background:#1d1d1d;border-radius:8px;padding:10px;text-align:center}
+  .modal-producto img{width:100%;height:150px;object-fit:cover;border-radius:5px}
+
+  /* PIZARRON */
+  .pizarron{padding:28px 16px}
+  .fotos{display:flex;flex-wrap:wrap;gap:12px;max-width:1200px;margin:0 auto}
+  .foto img{width:220px;height:150px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+
+  /* CONTACTO */
+  .contacto{padding:28px 16px}
+  #contact-form{max-width:800px;margin:0 auto;display:grid;gap:10px}
+  #contact-form input,#contact-form textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff;resize:vertical}
+  #contact-form button{background:var(--guinda);color:#fff;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+
+  .whatsapp-btn{display:inline-block;background-color:#25D366;color:white;padding:12px 20px;border-radius:25px;text-decoration:none;font-weight:700}
+
+  /* Responsive */
+  @media(max-width:900px){
+    .catalogo .container{grid-template-columns:1fr;}
+    .sidebar{order:2}
+    .moto-item img{width:48px;height:34px}
+    .slider{height:20vh}
+  }
+  @media(min-width:1200px){
+    #lista-catalogo{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">
-      <img src="images/logo/logo.png" alt="JQ Motors Logo">
+      <img src="images/logo/logo.png" alt="JQ Motors Logo" onerror="this.style.display='none'">
       <h1>JQ Motors</h1>
     </div>
     <nav>
       <ul>
         <li><a href="#inicio" class="active">Inicio</a></li>
-        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#promociones">Promociones</a></li>
         <li><a href="#recuerdos">Pizarrón</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li><button id="admin-btn" class="admin-btn">⚙️ Administrador</button></li>
       </ul>
     </nav>
   </header>
 
-  <!-- 🏍️ Slider principal -->
+  <!-- SLIDER -->
   <section id="inicio" class="slider">
-    <div class="slide fade">
-      <img src="images/portada/n250.jpg" alt="Bajaj N250">
-      <div class="text">🏍️ Bajaj N250 — Potencia y diseño moderno</div>
-    </div>
+    <div class="slide" style="display:block"><img src="images/portada/n250.jpg" alt="N250"></div>
+    <div class="slide"><img src="images/portada/ns200.jpg" alt="NS200"></div>
+    <div class="slide"><img src="images/portada/dominar400.jpg" alt="Dominar 400"></div>
+    <div class="text">Refacciones y servicio — JQ Motors</div>
+  </section>
 
-    <div class="slide fade">
-      <img src="images/portada/ns200.jpg" alt="Bajaj NS200">
-      <div class="text">⚡ Pulsar NS200 — Agilidad extrema</div>
-    </div>
-
-    <div class="slide fade">
-      <img src="images/portada/dominar400.jpg" alt="Dominar 400">
-      <div class="text">🔥 Dominar 400 — La reina del asfalto</div>
+  <!-- PROMOCIONES -->
+  <section id="promociones" class="promociones">
+    <h2>Promociones Especiales</h2>
+    <div class="promo-container">
+      <div class="promo-card">
+        <img src="images/promociones/promo1.jpg" alt="Promo 1" onerror="this.src='images/promociones/placeholder.png'">
+        <h3>Descuento en refacciones</h3>
+        <p class="precio">DE $630 A $500 MXN</p>
+      </div>
+      <div class="promo-card">
+        <img src="images/promociones/promo2.jpg" alt="Promo 2" onerror="this.src='images/promociones/placeholder.png'">
+        <h3>Mantenimiento gratuito</h3>
+        <p class="precio">Gratis</p>
+      </div>
     </div>
   </section>
 
-  <!-- 💸 Promociones -->
-  <section id="promociones" class="promociones">
-  <h2>Promociones Especiales</h2>
-  <div class="promo-container">
-    
-    <div class="promo-card">
-      <img src="images/promociones/promo1.jpg" alt="Promo 1">
-      <h3>Descuento en refacciones</h3>
-      <p class="precio">DE $630 A 500 MXN</p>
+  <!-- CATALOGO (sección anclada) -->
+  <section id="catalogo" class="catalogo">
+    <h2>Catálogo de Refacciones</h2>
+    <div class="container">
+      <!-- SIDEBAR: selector de motos -->
+      <aside class="sidebar">
+        <h2>Modelos Bajaj</h2>
+        <input id="buscador" type="text" placeholder="Buscar modelo o pieza...">
+        <ul class="motos-list" id="motos-list">
+          <!-- items generados por JS -->
+        </ul>
+      </aside>
+
+      <!-- CONTENIDO: lista y despiece -->
+      <section>
+        <div id="lista-catalogo"></div>
+      </section>
     </div>
+  </section>
 
-    <div class="promo-card">
-      <img src="images/promociones/promo2.jpg" alt="Promo 2">
-      <h3>Mantenimiento gratuito</h3>
-      <p>Revisión gratuita por cada compra de moto nueva.</p>
-      <p class="precio">Gratis</p>
-    </div>
-
-    <!-- Agrega más promociones aquí -->
-    <!--
-    <div class="promo-card">
-      <img src="images/promociones/promo3.jpg" alt="Promo 3">
-      <h3>Nombre de promoción</h3>
-      <p>Descripción de la promoción.</p>
-      <p class="precio">$Precio</p>
-    </div>
-    -->
-
-  </div>
-</section>
-
-
-  <!-- 📝 Pizarrón / Recuerdos -->
+  <!-- PIZARRON -->
   <section id="recuerdos" class="pizarron">
     <h2>Pizarrón</h2>
-    <p>Comparte tus experiencias y fotos con tu Bajaj.</p>
+    <p style="max-width:1200px;margin:0 auto 12px;color:#bbb">Comparte tus experiencias y fotos con tu Bajaj.</p>
     <div class="fotos">
-      <!-- Aquí puedes poner imágenes de clientes -->
-      <div class="foto"><img src="images/pizarron/foto1.jpg" alt="Foto 1"></div>
-      <div class="foto"><img src="images/pizarron/foto2.jpg" alt="Foto 2"></div>
+      <div class="foto"><img src="images/pizarron/foto1.jpg" alt="Foto 1" onerror="this.src='images/pizarron/placeholder.png'"></div>
+      <div class="foto"><img src="images/pizarron/foto2.jpg" alt="Foto 2" onerror="this.src='images/pizarron/placeholder.png'"></div>
     </div>
   </section>
 
-  <!-- 📞 Contacto -->
+  <!-- CONTACTO -->
   <section id="contacto" class="contacto">
     <h2>Contacto</h2>
     <form id="contact-form">
@@ -106,48 +194,223 @@
     </form>
   </section>
 
-  <!-- 🔗 Script para slider -->
-  <script src="js/slider.js"></script>
+  <!-- MODAL PIEZAS -->
+  <div id="modal" class="modal-catalogo" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h2 id="modal-titulo">Detalle</h2>
+        <div id="modal-cerrar" class="modal-close">✕</div>
+      </div>
+      <div id="modal-productos" class="modal-productos"></div>
+    </div>
+  </div>
 
+  <!-- FOOTER -->
+  <footer style="padding:18px;text-align:center;border-top:1px solid rgba(255,255,255,0.03);margin-top:18px">
+    <p style="margin:4px;color:#bbb">¿Necesitas ayuda? Contáctanos.</p>
+    <a class="whatsapp-btn" href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+    <p style="margin-top:8px;color:#666;font-size:12px">© JQ Motors</p>
+  </footer>
+
+  <!-- SCRIPTS: slider + catálogo + modal + buscador (todo inline) -->
+  <script>
+  (function(){
+    // SLIDER
+    (function sliderInit(){
+      const slides = document.querySelectorAll('.slide');
+      let idx = 0;
+      if(!slides.length) return;
+      slides.forEach(s=>s.style.display='none');
+      slides[0].style.display = 'block';
+      setInterval(()=>{
+        slides.forEach(s=>s.style.display='none');
+        idx = (idx + 1) % slides.length;
+        slides[idx].style.display = 'block';
+      },4000);
+    })();
+
+    // UI selectors
+    const listaCatalogo = document.getElementById('lista-catalogo');
+    const motosList = document.getElementById('motos-list');
+    const buscador = document.getElementById('buscador');
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalProductos = document.getElementById('modal-productos');
+    const modalCerrar = document.getElementById('modal-cerrar');
+
+    // Datos ejemplo (edita/añade según necesites)
+    const datos = {
+      'todos': {
+        nombre: 'Todos',
+        secciones: []
+      },
+      'ns-200': {
+        nombre: 'NS 200',
+        secciones: [
+          { titulo: 'Cabeza de cilindro', piezas: [ {id:'ns200-cab-1', nombre:'Junta cabeza', img:'images/piezas/junta.jpg', codigo:'NS200-CAB-01'} ] },
+          { titulo: 'Sistema de frenos', piezas: [ {id:'ns200-fre-1', nombre:'Balatas', img:'images/piezas/balatas.jpg', codigo:'NS200-FRE-01'} ] }
+        ]
+      },
+      'dominar-400': {
+        nombre: 'Dominar 400',
+        secciones: [
+          { titulo: 'Transmisión', piezas: [ {id:'dom400-tran-1', nombre:'Juego de piñón', img:'images/piezas/pinon.jpg', codigo:'DOM400-TR-01'} ] },
+          { titulo: 'Escape', piezas: [ {id:'dom400-esc-1', nombre:'Silenciador', img:'images/piezas/silenciador.jpg', codigo:'DOM400-ESC-01'} ] }
+        ]
+      },
+      'bajaj-pulsar':{
+        nombre:'Pulsar 200',
+        secciones:[{titulo:'Motor',piezas:[{id:'pul-200-01',nombre:'Filtro de aire',img:'images/piezas/filtro.jpg',codigo:'PUL200-FIL-01'}]}]
+      },
+      'n250':{
+        nombre:'N250',
+        secciones:[
+          {titulo:'Transmisión',piezas:[{id:'n250-01',nombre:'Cadena',img:'images/piezas/cadena.jpg',codigo:'N250-CD-01'}]},
+          {titulo:'Frenos',piezas:[{id:'n250-02',nombre:'Disco freno',img:'images/piezas/disco.jpg',codigo:'N250-DF-01'}]}
+        ]
+      }
+    };
+
+    // Render motos in sidebar (from datos keys except 'todos' we add manually)
+    function renderMotos(){
+      motosList.innerHTML = '';
+      // Option: add a "Todos" item first
+      const todosLi = document.createElement('li');
+      todosLi.className = 'moto-item active';
+      todosLi.dataset.model = 'todos';
+      todosLi.innerHTML = `<img src="images/motos/todos.jpg" alt="Todos" onerror="this.src='images/moto-placeholder.png'"><div class="moto-name">Todos</div>`;
+      todosLi.addEventListener('click', ()=>{ selectMoto(todosLi,'todos'); mostrarTodos(); });
+      motosList.appendChild(todosLi);
+
+      Object.keys(datos).forEach(key=>{
+        if(key==='todos') return;
+        const m = datos[key];
+        const li = document.createElement('li');
+        li.className = 'moto-item';
+        li.dataset.model = key;
+        li.innerHTML = `<img src="images/motos/${key}.jpg" alt="${m.nombre}" onerror="this.src='images/moto-placeholder.png'"><div class="moto-name">${m.nombre}</div>`;
+        li.addEventListener('click', ()=>{ selectMoto(li,key); mostrarManual(key); });
+        motosList.appendChild(li);
+      });
+    }
+
+    function selectMoto(el, key){
+      document.querySelectorAll('.moto-item').forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      // if mobile, scroll to products
+      if(window.innerWidth < 900){
+        document.getElementById('lista-catalogo').scrollIntoView({behavior:'smooth'});
+      }
+    }
+
+    // Show all products from all models
+    function mostrarTodos(){
+      listaCatalogo.innerHTML = '';
+      // loop over models and append their sections
+      Object.keys(datos).forEach(k=>{
+        if(k==='todos') return;
+        datos[k].secciones.forEach(sec=>{
+          appendSection(k, sec);
+        });
+      });
+    }
+
+    function appendSection(modelKey, sec){
+      const secWrap = document.createElement('div');
+      secWrap.className = 'despiece-seccion';
+      secWrap.innerHTML = `<h3>${sec.titulo}</h3>`;
+      const grid = document.createElement('div');
+      grid.className = 'despiece-grid';
+      sec.piezas.forEach(p=>{
+        const pieza = document.createElement('div');
+        pieza.className = 'pieza';
+        pieza.dataset.id = p.id;
+        pieza.innerHTML = `<img src="${p.img}" alt="${p.nombre}" onerror="this.src='images/piezas/placeholder.png'"><p>${p.nombre}</p><small>${p.codigo}</small>`;
+        pieza.addEventListener('click', ()=> mostrarModalPieza(p));
+        grid.appendChild(pieza);
+      });
+      secWrap.appendChild(grid);
+      listaCatalogo.appendChild(secWrap);
+    }
+
+    // Show manual for a specific model
+    function mostrarManual(modelKey){
+      const data = datos[modelKey];
+      if(!data) return;
+      listaCatalogo.innerHTML = '';
+
+      const titulo = document.createElement('div');
+      titulo.className = 'despiece-seccion';
+      titulo.innerHTML = `<h3>${data.nombre} — Manual de despiece</h3><p style="color:#bbb;margin-top:6px">Selecciona una pieza para ver detalles o agregar al carrito.</p>`;
+      listaCatalogo.appendChild(titulo);
+
+      data.secciones.forEach(sec=>{
+        appendSection(modelKey, sec);
+      });
+    }
+
+    // Modal show
+    function mostrarModalPieza(p){
+      modalTitulo.textContent = p.nombre;
+      modalProductos.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <img src="${p.img}" style="width:140px;height:140px;object-fit:contain;border-radius:8px;background:#fff;padding:6px" onerror="this.src='images/piezas/placeholder.png'">
+          <div style="color:#fff;flex:1;min-width:200px">
+            <h3 style="margin:0 0 6px 0">${p.nombre}</h3>
+            <p style="margin:0 0 6px 0;color:#ccc">Código: ${p.codigo}</p>
+            <p style="margin:0 0 6px 0;color:#ccc">Precio: --</p>
+            <div style="margin-top:8px">
+              <button id="agregar-${p.id}" style="padding:8px 12px;border-radius:8px;background:var(--guinda);color:#fff;border:none;cursor:pointer">Agregar</button>
+            </div>
+          </div>
+        </div>
+      `;
+      modal.style.display = 'block';
+      const btn = document.getElementById(`agregar-${p.id}`);
+      if(btn) btn.addEventListener('click', ()=> alert(p.nombre + ' agregado (simulado)'));
+    }
+
+    // Modal events
+    modalCerrar.addEventListener('click', ()=> modal.style.display='none');
+    modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.style.display='none' });
+
+    // Buscador: filters motos list (by model name) and also filters visible piezas when on a model
+    buscador.addEventListener('input', ()=>{
+      const q = buscador.value.trim().toLowerCase();
+      // filter moto items
+      document.querySelectorAll('.moto-item').forEach(el=>{
+        const name = el.querySelector('.moto-name').textContent.toLowerCase();
+        el.style.display = name.includes(q) ? 'flex' : 'none';
+      });
+      // if searching for piece names, filter pieces shown
+      if(q.length > 0 && document.querySelector('.moto-item.active')){
+        // search within currently rendered pieces
+        document.querySelectorAll('.pieza').forEach(pEl=>{
+          const txt = pEl.textContent.toLowerCase();
+          pEl.style.display = txt.includes(q) ? '' : 'none';
+        });
+      } else {
+        document.querySelectorAll('.pieza').forEach(pEl=>pEl.style.display = '');
+      }
+    });
+
+    // Init
+    renderMotos();
+    // select first model by default (after render)
+    const first = document.querySelector('.moto-item');
+    if(first) first.click();
+    // show all (or choose to show first model)
+    mostrarTodos();
+
+    // Contact form demo behavior
+    const contactForm = document.getElementById('contact-form');
+    contactForm && contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Gracias, tu mensaje fue enviado (simulado).');
+      contactForm.reset();
+    });
+
+  })();
+  </script>
 </body>
-<!-- 📦 Catálogo -->
-<section class="catalogo">
-  <h2>Catálogo de Refacciones</h2>
-  <div class="container">
-    <!-- Sidebar de categorías -->
-    <div class="sidebar">
-      <h2>Categorías</h2>
-      <ul>
-        <li class="active" data-cat="todos"><img src="images/categorias/todos.png" class="cat-icon">Todos</li>
-        <li data-cat="tornilleria"><img src="images/categorias/tornilleria.png" class="cat-icon">Tornillería</li>
-        <li data-cat="balatas"><img src="images/categorias/balatas.png" class="cat-icon">Balatas</li>
-        <li data-cat="retenes"><img src="images/categorias/retenes.png" class="cat-icon">Retenes</li>
-        <li data-cat="filtro-aceite"><img src="images/categorias/filtro-aceite.png" class="cat-icon">Filtro Aceite</li>
-        <li data-cat="filtro-aire"><img src="images/categorias/filtro-aire.png" class="cat-icon">Filtro Aire</li>
-        <li data-cat="filtro-gasolina"><img src="images/categorias/filtro-gasolina.png" class="cat-icon">Filtro Gasolina</li>
-        <li data-cat="juntas"><img src="images/categorias/juntas.png" class="cat-icon">Juntas</li>
-        <li data-cat="manijas"><img src="images/categorias/manijas.png" class="cat-icon">Manijas</li>
-      </ul>
-    </div>
-
-    <!-- Contenedor principal de productos -->
-    <div class="productos" id="lista-catalogo"></div>
-  </div>
-</section>
-
-<!-- Modal de catálogo -->
-<div id="modalCatalogo" class="modal-catalogo">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 id="modalTitulo">Categoría</h2>
-      <span id="modalCerrar" class="modal-close">&times;</span>
-    </div>
-    <div id="modalProductos" class="modal-productos">
-      <!-- Productos se llenarán aquí dinámicamente -->
-    </div>
-  </div>
-</div>
-<!-- JS del catálogo -->
-<script src="js/catalogo.js"></script>
-
 </html>
