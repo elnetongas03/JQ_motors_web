@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pizarrón - JQ Motors</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:'Montserrat',sans-serif;
+        background:#f4f4f4;
+    }
+
+    header{
+        background:#24304a;
+        padding:20px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        color:white;
+    }
+
+    header img{
+        height:60px;
+    }
+
+    .contenedor{
+        padding:40px;
+    }
+
+    h2{
+        text-align:center;
+        color:#24304a;
+    }
+
+    /* Galería */
+    .galeria{
+        display:flex;
+        flex-wrap:wrap;
+        gap:20px;
+        justify-content:center;
+        margin-bottom:40px;
+    }
+
+    .item{
+        width:180px;
+        text-align:center;
+        background:white;
+        padding:10px;
+        border-radius:10px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .item img{
+        width:100%;
+        height:180px;
+        object-fit:cover;
+        border-radius:10px;
+    }
+
+    /* Pizarra */
+    #pizarron{
+        width:100%;
+        height:300px;
+        background:#24304a;
+        color:white;
+        border:none;
+        border-radius:12px;
+        padding:20px;
+        font-size:18px;
+        resize:none;
+        box-shadow:inset 0 0 12px rgba(0,0,0,0.4);
+    }
+
+    .btn-volver{
+        display:inline-block;
+        padding:12px 25px;
+        background:#7a0a23;
+        color:white;
+        border-radius:10px;
+        text-decoration:none;
+        transition:.3s;
+        margin-top:25px;
+    }
+
+    .btn-volver:hover{
+        background:#a31132;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="images/logo/logo.png">
+    <h1>Pizarrón JQ Motors</h1>
+</header>
+
+<div class="contenedor">
+
+    <h2>Clientes</h2>
+
+    <div class="galeria" id="galeria"></div>
+
+    <h2>Pizarrón</h2>
+    <textarea id="pizarron" placeholder="Escribe notas aquí..."></textarea>
+
+    <br>
+    <a href="index.html" class="btn-volver">Regresar</a>
+
+</div>
+
+<script>
+    // Carpeta donde guardas las fotos de clientes
+    const ruta = "images/clientes/";
+
+    // Lista automática (solo agrega nombres aquí si quieres)
+    const fotos = [
+        "cliente1.jpg",
+        "cliente2.jpg",
+        "cliente3.jpg",
+        "cliente4.png"
+    ];
+
+    const galeria = document.getElementById("galeria");
+
+    fotos.forEach(f => {
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+            <img src="${ruta}${f}">
+            <p>${f.replace(/\.[^/.]+$/, "").toUpperCase()}</p>
+        `;
+
+        galeria.appendChild(div);
+    });
+</script>
+
+</body>
+</html>

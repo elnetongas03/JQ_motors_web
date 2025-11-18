@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> | Refacciones &amp; Servicio</title>
+
+  <meta name="description"
+        content=" – Refacciones y servicio de motocicletas Bajaj. Promociones, catálogo de piezas y contacto.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#111;
+      --panel:#121212;
+      --card:#1b1b1b;
+      --muted:#cfcfcf;
+      --guinda:#7B1E1E;
+      --guinda-2:#A83434;
+      --shadow:0 6px 18px rgba(0,0,0,.6);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg);
+      color:#eee;
+      scroll-behavior:smooth;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:var(--guinda);
+      padding:10px 18px;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo img{
+      height:44px;
+      display:block;
+    }
+    .logo h1{
+      margin:0;
+      font-size:1rem;
+      color:#fff;
+    }
+    .navbar nav ul{
+      list-style:none;
+      display:flex;
+      gap:14px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    .navbar a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 8px;
+    }
+    .navbar a:hover,
+    .navbar a.active{
+      border-bottom:2px solid #fff;
+    }
+
+    /* ---------- SLIDER ---------- */
+    .slider{
+      position:relative;
+      width:100%;
+      height:32vh;
+      overflow:hidden;
+    }
+    .slide{
+      display:none;
+      position:absolute;
+      inset:0;
+    }
+    .slide.active{
+      display:block;
+    }
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .text{
+      position:absolute;
+      bottom:18px;
+      left:18px;
+      background:rgba(0,0,0,.45);
+      padding:8px 14px;
+      border-radius:8px;
+      color:#fff;
+      font-weight:600;
+    }
+
+  /* ---------- PROMOCIONES ---------- */
+.promociones{
+  padding:28px 16px;
+}
+
+.promociones h2{
+  max-width:1200px;
+  margin:0 auto 12px;
+  color:var(--guinda-2);
+}
+
+/* CONTENEDOR */
+.promo-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* TARJETA */
+.promo-card{
+  background:var(--panel);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  text-align:center;
+
+  /* MARCO AZUL MARINO */
+  border:4px solid #1d2842;
+}
+
+/* IMAGEN MÁS GRANDE (50% DEL MARCO) */
+.promo-card img{
+  width:50%;     /* 50% EXACTO DE LA TARJETA */
+  height:auto;   /* Mantiene proporción */
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+/* TÍTULO */
+.promo-card h3{
+  margin:8px 0;
+  color:#fff;
+}
+
+/* PRECIO */
+.promo-card .precio{
+  color:var(--guinda-2);
+  font-weight:700;
+  font-size:20px;
+}
+
+    }
+
+    /* ---------- NUEVO PIZARRÓN ---------- */
+    .pizarron{
+      padding:40px 16px;
+      background-image:url("../images/pizarron/ladrillos.jpg");
+      background-size:cover;
+      background-position:center;
+      text-align:center;
+      border-top:2px solid rgba(255,255,255,.05);
+      border-bottom:2px solid rgba(255,255,255,.05);
+    }
+    .pizarron h2{
+      color:#fff;
+      text-shadow:0 3px 8px rgba(0,0,0,.7);
+    }
+    .fotos{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:25px;
+      margin-top:20px;
+    }
+    .foto{
+      width:240px;
+      height:180px;
+      background:#fff;
+      padding:10px;
+      border-radius:6px;
+      box-shadow:0 10px 25px rgba(0,0,0,.7);
+      transform:rotate(-2deg);
+      transition:transform .2s;
+    }
+    .foto:nth-child(even){
+      transform:rotate(2deg);
+    }
+    .foto:hover{
+      transform:scale(1.04) rotate(0deg);
+    }
+    .foto img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:4px;
+    }
+
+    /* ---------- CONTACTO ---------- */
+    .contacto{
+      padding:28px 16px;
+    }
+    #contact-form{
+      max-width:800px;
+      margin:0 auto;
+      display:grid;
+      gap:10px;
+    }
+    #contact-form input,
+    #contact-form textarea{
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.06);
+      background:#0b0b0b;
+      color:#fff;
+      resize:vertical;
+    }
+    #contact-form button{
+      background:var(--guinda);
+      color:#fff;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .whatsapp-btn{
+      display:inline-block;
+      background-color:#25D366;
+      color:white;
+      padding:12px 20px;
+      border-radius:25px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal-catalogo{
+      display:none;
+      position:fixed;
+      z-index:2000;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      overflow:auto;
+      background-color:rgba(0,0,0,.8);
+    }
+    .modal-content{
+      background:#121212;
+      margin:48px auto;
+      padding:18px;
+      border-radius:10px;
+      max-width:900px;
+      color:#eee;
+      box-shadow:var(--shadow);
+    }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .modal-close{
+      cursor:pointer;
+      font-size:1.4rem;
+      font-weight:700;
+    }
+
+    .modal-productos{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+      gap:15px;
+      margin-top:16px;
+    }
+
+    .modal-producto{
+      background:#1d1d1d;
+      border-radius:8px;
+      padding:10px;
+      text-align:center;
+    }
+    .modal-producto img{
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      border-radius:5px;
+    }
+
+    @media (max-width:900px){
+      .slider{height:20vh;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ---------- NAVBAR ---------- -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../images/logo/logo.png" alt="Logo"
+           onerror="this.style.display='none'">
+      <h1></h1>
+    </div>
+    <nav aria-label="Menú principal">
+      <ul>
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="promociones.html">Promociones</a></li>
+        <li><a href="pizarron.html">Pizarrón</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ---------- SLIDER ---------- -->
+  <section id="inicio" class="slider">
+    <div class="slide active">
+      <img src="../images/portada/slide1.jpg" alt="Portada principal">
+    </div>
+    <div class="slide">
+      <img src="../images/portada/n250.jpg" alt="Moto N250">
+    </div>
+    <div class="slide">
+      <img src="../images/portada/ns200.jpg" alt="Moto NS 200">
+    </div>
+    <div class="slide">
+      <img src="../images/portada/dominar400.jpg" alt="Moto Dominar 400">
+    </div>
+    <div class="text">Refacciones y servicio — JQ Motors</div>
+  </section>
+
+  <!-- ---------- PROMOCIONES ---------- -->
+  <section id="promociones" class="promociones">
+    <h2>Promociones Especiales</h2>
+    <div class="promo-container">
+      <div class="promo-card">
+        <img src="../images/promociones/promo1.jpg" alt="Descuento en refacciones">
+        <h3>Descuento en refacciones</h3>
+        <p class="precio">DE $630 A $500 MXN</p>
+      </div>
+      <div class="promo-card">
+        <img src="../images/promociones/promo2.jpg" alt="Mantenimiento gratuito">
+        <h3>Nuevas promociones</h3>
+        <p class="precio">Gratis</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- NUEVO PIZARRÓN ---------- -->
+  <section id="recuerdos" class="pizarron">
+    <h2>Pizarrón de Clientes</h2>
+
+    <p style="max-width:1200px;margin:0 auto 12px;color:#eee;font-weight:600">
+      Haz clic para ver todas las fotos de nuestros clientes.
+    </p>
+
+    <a href="pizarron.html" target="_blank" style="text-decoration:none;color:inherit;">
+      <div class="fotos">
+        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 1"></div>
+        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 2"></div>
+        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 3"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ---------- MODAL ---------- -->
+  <div id="modal" class="modal-catalogo">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-titulo">Detalle</h2>
+        <div id="modal-cerrar" class="modal-close">✕</div>
+      </div>
+      <div id="modal-productos" class="modal-productos"></div>
+    </div>
+  </div>
+
+  <footer style="padding:18px;text-align:center;border-top:1px solid rgba(255,255,255,.03);margin-top:18px">
+
+  <p style="margin:4px;color:#bbb;font-weight:600">
+    ¿Necesitas ayuda? Contáctanos por WhatsApp:
+  </p>
+
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:10px">
+
+    <!-- REFACCIONES -->
+    <a class="whatsapp-btn"
+       href="https://wa.me/5217716978347"
+       target="_blank">
+      Refacciones
+    </a>
+
+    <!-- TALLER -->
+    <a class="whatsapp-btn"
+       href="https://wa.me/5215517263228"
+       target="_blank">
+      Taller
+    </a>
+
+    <!-- ASESOR DE VENTA -->
+    <a class="whatsapp-btn"
+       href="https://wa.me/5217717210673"
+       target="_blank">
+      Ventas
+    </a>
+
+  </div>
+
+  <p style="margin-top:12px;color:#666;font-size:12px">© JQ Motors</p>
+</footer>
+
+
+  <!-- ---------- SCRIPTS ---------- -->
+  <script>
+    /* ==== SLIDER ==== */
+    (function(){
+      const slides = document.querySelectorAll('.slide');
+      let idx = 0;
+      if (!slides.length) return;
+      setInterval(()=>{
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      },4000);
+    })();
+
+    /* ==== MODAL ==== */
+    const modal = document.getElementById('modal');
+    const modalCerrar = document.getElementById('modal-cerrar');
+    modalCerrar.addEventListener('click', () => { modal.style.display = 'none'; });
+    window.addEventListener('click', e => { if(e.target===modal) modal.style.display='none'; });
+  </script>
+
+</body>
+</html>
