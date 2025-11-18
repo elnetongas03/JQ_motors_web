@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> | Refacciones &amp; Servicio</title>
+  <title>JQ Motors | Refacciones &amp; Servicio</title>
 
   <meta name="description"
-        content=" – Refacciones y servicio de motocicletas Bajaj. Promociones, catálogo de piezas y contacto.">
+        content="JQ Motors – Refacciones y servicio de motocicletas Bajaj. Promociones, catálogo de piezas y contacto.">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
         rel="stylesheet">
@@ -118,7 +118,6 @@
   color:var(--guinda-2);
 }
 
-/* CONTENEDOR */
 .promo-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -127,46 +126,38 @@
   margin:0 auto;
 }
 
-/* TARJETA */
 .promo-card{
   background:var(--panel);
   border-radius:20px;
   padding:20px;
   box-shadow:var(--shadow);
   text-align:center;
-
-  /* MARCO AZUL MARINO */
   border:4px solid #1d2842;
 }
 
-/* IMAGEN MÁS GRANDE (50% DEL MARCO) */
 .promo-card img{
-  width:50%;     /* 50% EXACTO DE LA TARJETA */
-  height:auto;   /* Mantiene proporción */
+  width:50%;
+  height:auto;
   object-fit:cover;
   border-radius:10px;
   margin-bottom:12px;
 }
 
-/* TÍTULO */
 .promo-card h3{
   margin:8px 0;
   color:#fff;
 }
 
-/* PRECIO */
 .promo-card .precio{
   color:var(--guinda-2);
   font-weight:700;
   font-size:20px;
 }
 
-    }
-
     /* ---------- NUEVO PIZARRÓN ---------- */
     .pizarron{
       padding:40px 16px;
-      background-image:url("../images/pizarron/ladrillos.jpg");
+      background-image:url("images/pizarron/ladrillos.jpg");
       background-size:cover;
       background-position:center;
       text-align:center;
@@ -236,7 +227,6 @@
       font-weight:700;
     }
 
-    /* ---------- FOOTER ---------- */
     .whatsapp-btn{
       display:inline-block;
       background-color:#25D366;
@@ -310,9 +300,9 @@
   <!-- ---------- NAVBAR ---------- -->
   <header class="navbar">
     <div class="logo">
-      <img src="../images/logo/logo.png" alt="Logo"
+      <img src="images/logo/logo.png" alt="Logo"
            onerror="this.style.display='none'">
-      <h1></h1>
+      <h1>JQ Motors</h1>
     </div>
     <nav aria-label="Menú principal">
       <ul>
@@ -328,16 +318,16 @@
   <!-- ---------- SLIDER ---------- -->
   <section id="inicio" class="slider">
     <div class="slide active">
-      <img src="../images/portada/slide1.jpg" alt="Portada principal">
+      <img src="images/portada/slide1.jpg" alt="Portada principal">
     </div>
     <div class="slide">
-      <img src="../images/portada/n250.jpg" alt="Moto N250">
+      <img src="images/portada/n250.jpg" alt="Moto N250">
     </div>
     <div class="slide">
-      <img src="../images/portada/ns200.jpg" alt="Moto NS 200">
+      <img src="images/portada/ns200.jpg" alt="Moto NS 200">
     </div>
     <div class="slide">
-      <img src="../images/portada/dominar400.jpg" alt="Moto Dominar 400">
+      <img src="images/portada/dominar400.jpg" alt="Moto Dominar 400">
     </div>
     <div class="text">Refacciones y servicio — JQ Motors</div>
   </section>
@@ -347,12 +337,12 @@
     <h2>Promociones Especiales</h2>
     <div class="promo-container">
       <div class="promo-card">
-        <img src="../images/promociones/promo1.jpg" alt="Descuento en refacciones">
+        <img src="images/promociones/promo1.jpg" alt="Descuento en refacciones">
         <h3>Descuento en refacciones</h3>
         <p class="precio">DE $630 A $500 MXN</p>
       </div>
       <div class="promo-card">
-        <img src="../images/promociones/promo2.jpg" alt="Mantenimiento gratuito">
+        <img src="images/promociones/promo2.jpg" alt="Mantenimiento gratuito">
         <h3>Nuevas promociones</h3>
         <p class="precio">Gratis</p>
       </div>
@@ -369,9 +359,9 @@
 
     <a href="pizarron.html" target="_blank" style="text-decoration:none;color:inherit;">
       <div class="fotos">
-        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 1"></div>
-        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 2"></div>
-        <div class="foto"><img src="../images/pizarron/placeholder.png" alt="Foto 3"></div>
+        <div class="foto"><img src="images/pizarron/placeholder.png" alt="Foto 1"></div>
+        <div class="foto"><img src="images/pizarron/placeholder.png" alt="Foto 2"></div>
+        <div class="foto"><img src="images/pizarron/placeholder.png" alt="Foto 3"></div>
       </div>
     </a>
   </section>
@@ -395,21 +385,18 @@
 
   <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:10px">
 
-    <!-- REFACCIONES -->
     <a class="whatsapp-btn"
        href="https://wa.me/5217716978347"
        target="_blank">
       Refacciones
     </a>
 
-    <!-- TALLER -->
     <a class="whatsapp-btn"
        href="https://wa.me/5215517263228"
        target="_blank">
       Taller
     </a>
 
-    <!-- ASESOR DE VENTA -->
     <a class="whatsapp-btn"
        href="https://wa.me/5217717210673"
        target="_blank">
@@ -421,10 +408,8 @@
   <p style="margin-top:12px;color:#666;font-size:12px">© JQ Motors</p>
 </footer>
 
-
   <!-- ---------- SCRIPTS ---------- -->
   <script>
-    /* ==== SLIDER ==== */
     (function(){
       const slides = document.querySelectorAll('.slide');
       let idx = 0;
@@ -436,7 +421,6 @@
       },4000);
     })();
 
-    /* ==== MODAL ==== */
     const modal = document.getElementById('modal');
     const modalCerrar = document.getElementById('modal-cerrar');
     modalCerrar.addEventListener('click', () => { modal.style.display = 'none'; });

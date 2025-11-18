@@ -168,7 +168,7 @@ body{
 
 <header class="navbar">
   <div class="logo">
-    <img src="../images/logo/logo.png" alt="Logo de JQ Motors">
+    <img src="images/logo/logo.png" alt="Logo de JQ Motors">
     <h1>JQ Motors</h1>
   </div>
   <nav aria-label="Menú principal">
@@ -209,7 +209,6 @@ body{
 </section>
 
 <script>
-// Submodelos por marca
 const submodelosData = {
   pulsar:["NS125","NS160","NS200","NS400 Z","RS200","N160","N250"],
   dominar:["400","250"],
@@ -219,56 +218,24 @@ const submodelosData = {
   platina:["125 5G","125 M","125 ST"]
 };
 
-// Nivel 3 dinámico desde la carpeta 'nivel3_partes'
-const nivel3CarpetaURL = '../catalogo/nivel3_partes/';
+const nivel3CarpetaURL = 'catalogo/nivel3_partes/';
 
-// Lista de carpetas del nivel 3 (copiar exactamente los nombres de carpetas que tienes)
 const carpetasNivel3 = [
-  "ABS",
-  "ARBOL_DE_LEVAS",
-  "ASIENTOS",
-  "BALANCEADOR_Y_O_BOMBA_DE_AGUA",
-  "BOBINAS_Y_O_REGULADOR",
-  "BOMBA_DE_ACEITE",
-  "CABEZA_DE_MOTOR",
-  "CAJA_FILTRO_DE_AIRE",
-  "CARTER_DERECHO",
-  "CARTER_IZQUIERDO",
-  "CHICOTES",
-  "CIGUEÑAL",
-  "CILINDRO_MAESTRO_DELANTERO",
-  "CILINDRO_Y_PISTON",
-  "CUBIERTAS",
-  "CUBIERTA_DE_CLUTCH",
-  "CUBIERTA_DE_CULATA",
-  "CUBIERTA_DE_ESTATOR",
+  "ABS","ARBOL_DE_LEVAS","ASIENTOS","BALANCEADOR_Y_O_BOMBA_DE_AGUA",
+  "BOBINAS_Y_O_REGULADOR","BOMBA_DE_ACEITE","CABEZA_DE_MOTOR",
+  "CAJA_FILTRO_DE_AIRE","CARTER_DERECHO","CARTER_IZQUIERDO","CHICOTES",
+  "CIGUEÑAL","CILINDRO_MAESTRO_DELANTERO","CILINDRO_Y_PISTON","CUBIERTAS",
+  "CUBIERTA_DE_CLUTCH","CUBIERTA_DE_CULATA","CUBIERTA_DE_ESTATOR",
   "CUERPO_DE_ACELERACION_O_CARBURADOR",
-  "DIRECCIONALES_TRASERAS_Y_DELANTERAS",
-  "DISCO_DELANTERO",
-  "DISCO_TRASERO",
-  "EMBRAGUE",
-  "ESCAPE_Y_SILENCIADOR",
-  "EVAP",
-  "FRENO_DE_DISCO_DELANTERO",
-  "FRENO_DE_DISCO_TRASERO",
-  "HORQUILLA_DELANTERA",
-  "HORQUILLA_OSCILANTE_Y_AMORTIGUADOR",
-  "MANILLAR",
-  "PARADOR_LATERAL",
-  "PEDAL_DE_CAMBIOS",
-  "PEDAL_DE_FRENO",
-  "POSAPIES_Y_SOPORTES",
-  "RADIADOR",
-  "SALPICADERA_DELANTERA",
-  "SOPORTE_DE_MOTOR_CHASIS",
-  "STATOR",
-  "TAMBOR",
-  "TANQUE_DE_GASOLINA_Y_CERRADURA",
-  "TRANSMICION",
-  "VALVULAS"
+  "DIRECCIONALES_TRASERAS_Y_DELANTERAS","DISCO_DELANTERO","DISCO_TRASERO",
+  "EMBRAGUE","ESCAPE_Y_SILENCIADOR","EVAP","FRENO_DE_DISCO_DELANTERO",
+  "FRENO_DE_DISCO_TRASERO","HORQUILLA_DELANTERA",
+  "HORQUILLA_OSCILANTE_Y_AMORTIGUADOR","MANILLAR","PARADOR_LATERAL",
+  "PEDAL_DE_CAMBIOS","PEDAL_DE_FRENO","POSAPIES_Y_SOPORTES","RADIADOR",
+  "SALPICADERA_DELANTERA","SOPORTE_DE_MOTOR_CHASIS","STATOR","TAMBOR",
+  "TANQUE_DE_GASOLINA_Y_CERRADURA","TRANSMICION","VALVULAS"
 ];
 
-// Código único de cada carpeta (la primera imagen dentro)
 const codigoImagen = {
   "ABS":"SB_1.png",
   "ARBOL_DE_LEVAS":"BT01.png",
@@ -314,7 +281,6 @@ const codigoImagen = {
   "VALVULAS":"LA_1.png"
 };
 
-// Manejo de botones
 const marcasBtns = document.querySelectorAll('.marca-btn');
 const submodelosDiv = document.getElementById('submodelos');
 const partesDiv = document.getElementById('partes');
@@ -346,13 +312,13 @@ marcasBtns.forEach(btn=>{
 });
 
 function limpiarNombre(carpeta){
-  // Quita guiones y subrayados, deja espacios
   return carpeta.replace(/_|-/g,' ');
 }
 
 function cargarPartes(){
   piezasDiv.innerHTML='';
   partesDiv.innerHTML='';
+
   carpetasNivel3.forEach(carpeta=>{
     const pDiv = document.createElement('div');
     pDiv.className='pieza';
