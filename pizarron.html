@@ -25,7 +25,7 @@
     }
 
     .contenedor{
-        padding:40px;
+        padding:40px 20px;
     }
 
     h2{
@@ -49,6 +49,12 @@
         padding:10px;
         border-radius:10px;
         box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        cursor:pointer;
+        transition:transform .2s;
+    }
+
+    .item:hover{
+        transform:translateY(-4px);
     }
 
     .item img{
@@ -72,12 +78,39 @@
     .btn-volver:hover{
         background:#a31132;
     }
+
+    /* MODAL */
+    .modal{
+        display:none;
+        position:fixed;
+        z-index:2000;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.9);
+        justify-content:center;
+        align-items:center;
+    }
+
+    .modal img{
+        max-width:90%;
+        max-height:90%;
+        border-radius:10px;
+        box-shadow:0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    @media(max-width:600px){
+        .item{
+            width:45%;
+        }
+    }
 </style>
 </head>
 <body>
 
 <header>
-    <img src="images/logo/logo.png">
+    <img src="images/logo/logo.png" alt="Logo JQ Motors">
     <h1>Pizarrón JQ Motors</h1>
 </header>
 
@@ -87,36 +120,37 @@
 
     <div class="galeria" id="galeria"></div>
 
-    <br>
     <a href="index.html" class="btn-volver">Regresar</a>
 
 </div>
 
+<!-- Modal -->
+<div class="modal" id="modal">
+    <img src="" alt="Imagen ampliada">
+</div>
+
 <script>
-    // Carpeta donde guardas las fotos de clientes
     const ruta = "images/clientes/";
-
-    // Lista automática
-    const fotos = [
-        "cliente1.jpg",
-        "cliente2.jpg",
-        "cliente3.jpg",
-        "cliente4.png"
-    ];
-
+    const fotos = ["cliente1.jpg","cliente2.jpg"];
     const galeria = document.getElementById("galeria");
+    const modal = document.getElementById("modal");
+    const modalImg = modal.querySelector("img");
 
     fotos.forEach(f => {
         const div = document.createElement("div");
         div.className = "item";
-
-        div.innerHTML = `
-            <img src="${ruta}${f}">
-            <p>${f.replace(/\.[^/.]+$/, "").toUpperCase()}</p>
-        `;
+        div.innerHTML = `<img src="${ruta}${f}" alt="${f.replace(/\.[^/.]+$/, "")}"><p>${f.replace(/\.[^/.]+$/, "").toUpperCase()}</p>`;
+        
+        div.addEventListener("click", ()=>{
+            modal.style.display = "flex";
+            modalImg.src = ruta + f;
+        });
 
         galeria.appendChild(div);
     });
+
+    // Cerrar modal al hacer clic en fondo
+    modal.addEventListener("click", ()=> { modal.style.display = "none"; });
 </script>
 
 </body>
