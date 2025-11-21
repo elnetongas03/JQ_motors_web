@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Promociones - JQ Motors</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:'Montserrat',sans-serif;
+        background:#f4f4f4;
+    }
+
+    header{
+        background:#7B1E1E; /* Guinda */
+        padding:20px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        color:white;
+    }
+
+    header img{
+        height:60px;
+    }
+
+    .contenedor{
+        padding:40px;
+        max-width:1200px;
+        margin:0 auto;
+    }
+
+    h2{
+        text-align:center;
+        color:#7B1E1E;
+        margin-bottom:30px;
+    }
+
+    .promociones{
+        display:flex;
+        flex-wrap:wrap;
+        gap:20px;
+        justify-content:center;
+    }
+
+    .promo-item{
+        width:250px;
+        background:white;
+        border-radius:10px;
+        overflow:hidden;
+        box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        cursor:pointer;
+        transition:0.3s;
+        text-align:center;
+    }
+
+    .promo-item:hover{
+        transform:translateY(-5px);
+        box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .promo-item img{
+        width:100%;
+        height:160px;
+        object-fit:cover;
+    }
+
+    .promo-item h3{
+        margin:10px 0;
+        color:#7B1E1E;
+    }
+
+    .promo-item p{
+        margin:0 10px 10px;
+        color:#333;
+        font-size:0.9rem;
+    }
+
+    .btn-volver{
+        display:inline-block;
+        padding:12px 25px;
+        background:#7a0a23;
+        color:white;
+        border-radius:10px;
+        text-decoration:none;
+        transition:.3s;
+        margin-top:25px;
+    }
+
+    .btn-volver:hover{
+        background:#a31132;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="images/logo/logo.png" alt="Logo JQ Motors">
+    <h1>Promociones</h1>
+</header>
+
+<div class="contenedor">
+    <h2>Ofertas Especiales</h2>
+
+    <div class="promociones">
+        <div class="promo-item" onclick="abrirPromo('promocion1.html')">
+            <img src="images/promociones/promo1.jpg" alt="Promoción 1">
+            <h3>Promoción 1</h3>
+            <p>Descuento especial en repuestos Bajaj platina .</p>
+        </div>
+
+        <div class="promo-item" onclick="abrirPromo('promocion2.html')">
+            <img src="images/promociones/promo2.jpg" alt="Promoción 2">
+            <h3>Promoción 2</h3>
+            <p>Mantenimiento con 20% de descuento para motos Dominar.</p>
+        </div>
+
+        <!-- Agrega más promociones copiando este bloque -->
+    </div>
+
+    <br>
+    <a href="index.html" class="btn-volver">Regresar</a>
+</div>
+
+<script>
+function abrirPromo(url){
+    window.open(url, "_blank"); // Abre la promoción en nueva pestaña
+}
+</script>
+
+</body>
+</html>

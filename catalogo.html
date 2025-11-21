@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JQ Motors | Catálogo de Refacciones</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --bg:#111;
@@ -15,7 +13,6 @@
   --guinda-2:#A83434;
   --shadow:0 6px 18px rgba(0,0,0,.6);
 }
-
 *{box-sizing:border-box;}
 body{
   margin:0;
@@ -24,8 +21,6 @@ body{
   color:#eee;
   scroll-behavior:smooth;
 }
-
-/* NAVBAR */
 .navbar{
   display:flex;
   justify-content:space-between;
@@ -56,13 +51,9 @@ body{
 .navbar a:hover,.navbar a.active{
   border-bottom:2px solid #fff;
 }
-
-/* CATALOGO */
 .catalogo{padding:28px 16px;}
 .catalogo h2{max-width:1200px;margin:0 auto 12px;color:var(--guinda-2);}
 .container{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;}
-
-/* Nivel 1: Marcas */
 .marcas{
   display:flex;
   flex-wrap:wrap;
@@ -82,8 +73,6 @@ body{
   background:var(--guinda);
   transform:translateY(-2px);
 }
-
-/* Nivel 2: Submodelos */
 .scroll-submodelos{
   display:flex;
   overflow-x:auto;
@@ -108,8 +97,6 @@ body{
   background:var(--guinda-2);
   transform:translateY(-2px);
 }
-
-/* Nivel 3: Partes */
 .grid-partes{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
@@ -133,6 +120,7 @@ body{
   object-fit:cover;
   border-radius:6px;
   margin-top:6px;
+  transition: transform 0.3s;
 }
 .pieza span{
   margin:8px 0;
@@ -143,24 +131,24 @@ body{
   transform:translateY(-6px);
   box-shadow:0 10px 30px rgba(0,0,0,.7);
 }
-
-/* Nivel 4: Piezas individuales */
 .grid-piezas{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   margin-top:16px;
 }
 .grid-piezas img{
-  width:100%;
-  height:150px;
-  object-fit:cover;
+  width:300px;
+  max-width:90%;
+  height:auto;
+  object-fit:contain;
   border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.3s;
+  cursor:pointer;
 }
-
-@media(max-width:768px){
-  .grid-partes{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
-  .grid-piezas{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
+.grid-piezas img.expanded{
+  transform: scale(1.5);
 }
 </style>
 </head>
@@ -185,8 +173,6 @@ body{
 <section class="catalogo">
   <h2>Catálogo de Refacciones</h2>
   <div class="container">
-
-    <!-- Nivel 1 -->
     <div id="marcas" class="marcas">
       <button class="marca-btn" data-model="pulsar">Pulsar</button>
       <button class="marca-btn" data-model="dominar">Dominar</button>
@@ -196,15 +182,9 @@ body{
       <button class="marca-btn" data-model="platina">Platina</button>
     </div>
 
-    <!-- Nivel 2 -->
     <div id="submodelos" class="scroll-submodelos"></div>
-
-    <!-- Nivel 3 -->
     <div id="partes" class="grid-partes"></div>
-
-    <!-- Nivel 4 -->
     <div id="piezas" class="grid-piezas"></div>
-
   </div>
 </section>
 
@@ -219,65 +199,37 @@ const submodelosData = {
 };
 
 const nivel3CarpetaURL = 'catalogo/nivel3_partes/';
-
 const carpetasNivel3 = [
   "ABS","ARBOL_DE_LEVAS","ASIENTOS","BALANCEADOR_Y_O_BOMBA_DE_AGUA",
   "BOBINAS_Y_O_REGULADOR","BOMBA_DE_ACEITE","CABEZA_DE_MOTOR",
   "CAJA_FILTRO_DE_AIRE","CARTER_DERECHO","CARTER_IZQUIERDO","CHICOTES",
   "CIGUEÑAL","CILINDRO_MAESTRO_DELANTERO","CILINDRO_Y_PISTON","CUBIERTAS",
   "CUBIERTA_DE_CLUTCH","CUBIERTA_DE_CULATA","CUBIERTA_DE_ESTATOR",
-  "CUERPO_DE_ACELERACION_O_CARBURADOR",
-  "DIRECCIONALES_TRASERAS_Y_DELANTERAS","DISCO_DELANTERO","DISCO_TRASERO",
-  "EMBRAGUE","ESCAPE_Y_SILENCIADOR","EVAP","FRENO_DE_DISCO_DELANTERO",
-  "FRENO_DE_DISCO_TRASERO","HORQUILLA_DELANTERA",
-  "HORQUILLA_OSCILANTE_Y_AMORTIGUADOR","MANILLAR","PARADOR_LATERAL",
-  "PEDAL_DE_CAMBIOS","PEDAL_DE_FRENO","POSAPIES_Y_SOPORTES","RADIADOR",
-  "SALPICADERA_DELANTERA","SOPORTE_DE_MOTOR_CHASIS","STATOR","TAMBOR",
-  "TANQUE_DE_GASOLINA_Y_CERRADURA","TRANSMICION","VALVULAS"
+  "CUERPO_DE_ACELERACION_O_CARBURADOR","DIRECCIONALES_TRASERAS_Y_DELANTERAS",
+  "DISCO_DELANTERO","DISCO_TRASERO","EMBRAGUE","ESCAPE_Y_SILENCIADOR","EVAP",
+  "FRENO_DE_DISCO_DELANTERO","FRENO_DE_DISCO_TRASERO","HORQUILLA_DELANTERA",
+  "HORQUILLA_OSCILANTE_Y_AMORTIGUADOR","MANILLAR","PARADOR_LATERAL","PEDAL_DE_CAMBIOS",
+  "PEDAL_DE_FRENO","POSAPIES_Y_SOPORTES","RADIADOR","SALPICADERA_DELANTERA",
+  "SOPORTE_DE_MOTOR_CHASIS","STATOR","TAMBOR","TANQUE_DE_GASOLINA_Y_CERRADURA",
+  "TRANSMICION","VALVULAS"
 ];
 
 const codigoImagen = {
-  "ABS":"SB_1.png",
-  "ARBOL_DE_LEVAS":"BT01.png",
-  "ASIENTOS":"IE01.png",
-  "BALANCEADOR_Y_O_BOMBA_DE_AGUA":"LU_1.png",
-  "BOBINAS_Y_O_REGULADOR":"BO_1.png",
-  "BOMBA_DE_ACEITE":"MT_1.png",
-  "CABEZA_DE_MOTOR":"BO_1.png",
-  "CAJA_FILTRO_DE_AIRE":"JR_1.png",
-  "CARTER_DERECHO":"RH_1.png",
-  "CARTER_IZQUIERDO":"RD_1.png",
-  "CHICOTES":"IE_1.png",
-  "CIGUEÑAL":"GA_1.png",
-  "CILINDRO_MAESTRO_DELANTERO":"LR_1.png",
-  "CILINDRO_Y_PISTON":"LO_1.png",
-  "CUBIERTAS":"BI02.png",
-  "CUBIERTA_DE_CLUTCH":"BC_1.png",
-  "CUBIERTA_DE_CULATA":"BT01.png",
-  "CUBIERTA_DE_ESTATOR":"BO_1.png",
-  "CUERPO_DE_ACELERACION_O_CARBURADOR":"EO_1.png",
-  "DIRECCIONALES_TRASERAS_Y_DELANTERAS":"RA_1.png",
-  "DISCO_DELANTERO":"SR_1.png",
-  "DISCO_TRASERO":"SR_1.png",
-  "EMBRAGUE":"BR01.png",
-  "ESCAPE_Y_SILENCIADOR":"CO_1.png",
-  "EVAP":"AV01.png",
-  "FRENO_DE_DISCO_DELANTERO":"ER_1.png",
-  "FRENO_DE_DISCO_TRASERO":"ER_1.png",
-  "HORQUILLA_DELANTERA":"RR_1.png",
-  "HORQUILLA_OSCILANTE_Y_AMORTIGUADOR":"RO_1.png",
-  "MANILLAR":"NI01.png",
-  "PARADOR_LATERAL":"RA_1.png",
-  "PEDAL_DE_CAMBIOS":"DO_1.png",
-  "PEDAL_DE_FRENO":"DN_1.png",
-  "POSAPIES_Y_SOPORTES":"SE_1.png",
-  "RADIADOR":"DI01.png",
-  "SALPICADERA_DELANTERA":"LR_1.png",
-  "SOPORTE_DE_MOTOR_CHASIS":"PI_1.png",
-  "STATOR":"AT01.png",
-  "TAMBOR":"MB01.png",
-  "TANQUE_DE_GASOLINA_Y_CERRADURA":"NR_1.png",
-  "TRANSMICION":"AN01.png",
+  "ABS":"SB_1.png","ARBOL_DE_LEVAS":"BT01.png","ASIENTOS":"IE01.png",
+  "BALANCEADOR_Y_O_BOMBA_DE_AGUA":"LU_1.png","BOBINAS_Y_O_REGULADOR":"BO_1.png",
+  "BOMBA_DE_ACEITE":"MT_1.png","CABEZA_DE_MOTOR":"BO_1.png","CAJA_FILTRO_DE_AIRE":"JR_1.png",
+  "CARTER_DERECHO":"RH_1.png","CARTER_IZQUIERDO":"RD_1.png","CHICOTES":"IE_1.png",
+  "CIGUEÑAL":"GA_1.png","CILINDRO_MAESTRO_DELANTERO":"LR_1.png","CILINDRO_Y_PISTON":"LO_1.png",
+  "CUBIERTAS":"BI02.png","CUBIERTA_DE_CLUTCH":"BC_1.png","CUBIERTA_DE_CULATA":"BT01.png",
+  "CUBIERTA_DE_ESTATOR":"BO_1.png","CUERPO_DE_ACELERACION_O_CARBURADOR":"EO_1.png",
+  "DIRECCIONALES_TRASERAS_Y_DELANTERAS":"RA_1.png","DISCO_DELANTERO":"SR_1.png",
+  "DISCO_TRASERO":"SR_1.png","EMBRAGUE":"BR01.png","ESCAPE_Y_SILENCIADOR":"CO_1.png",
+  "EVAP":"AV01.png","FRENO_DE_DISCO_DELANTERO":"ER_1.png","FRENO_DE_DISCO_TRASERO":"ER_1.png",
+  "HORQUILLA_DELANTERA":"RR_1.png","HORQUILLA_OSCILANTE_Y_AMORTIGUADOR":"RO_1.png",
+  "MANILLAR":"NI01.png","PARADOR_LATERAL":"RA_1.png","PEDAL_DE_CAMBIOS":"DO_1.png",
+  "PEDAL_DE_FRENO":"DN_1.png","POSAPIES_Y_SOPORTES":"SE_1.png","RADIADOR":"DI1.png",
+  "SALPICADERA_DELANTERA":"LR_1.png","SOPORTE_DE_MOTOR_CHASIS":"PI_1.png","STATOR":"AT01.png",
+  "TAMBOR":"MB01.png","TANQUE_DE_GASOLINA_Y_CERRADURA":"NR_1.png","TRANSMICION":"AN01.png",
   "VALVULAS":"LA_1.png"
 };
 
@@ -286,21 +238,24 @@ const submodelosDiv = document.getElementById('submodelos');
 const partesDiv = document.getElementById('partes');
 const piezasDiv = document.getElementById('piezas');
 
+let marcaActual = null;
+let submodeloActual = null;
+
+// MARCAS
 marcasBtns.forEach(btn=>{
   btn.addEventListener('click',()=>{
+    marcaActual = btn.dataset.model;
     marcasBtns.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    const marca = btn.dataset.model;
-
     submodelosDiv.innerHTML='';
     partesDiv.innerHTML='';
     piezasDiv.innerHTML='';
-
-    if(submodelosData[marca]){
-      submodelosData[marca].forEach(sm=>{
+    if(submodelosData[marcaActual]){
+      submodelosData[marcaActual].forEach(sm=>{
         const smBtn = document.createElement('button');
         smBtn.textContent = sm;
         smBtn.addEventListener('click',()=>{
+          submodeloActual = sm;
           submodelosDiv.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
           smBtn.classList.add('active');
           cargarPartes();
@@ -312,33 +267,35 @@ marcasBtns.forEach(btn=>{
 });
 
 function limpiarNombre(carpeta){
-  return carpeta.replace(/_|-/g,' ');
+  return carpeta.replace(/_/g,' ').replace(/-/g,' ');
 }
 
 function cargarPartes(){
   piezasDiv.innerHTML='';
   partesDiv.innerHTML='';
-
   carpetasNivel3.forEach(carpeta=>{
     const pDiv = document.createElement('div');
     pDiv.className='pieza';
     const nombre = limpiarNombre(carpeta);
     const imgURL = nivel3CarpetaURL + carpeta + '/' + codigoImagen[carpeta];
-    pDiv.innerHTML=`<img src="${imgURL}" alt="${nombre}"><span>${nombre}</span>`;
+    pDiv.innerHTML = `<img src="${imgURL}" alt="${nombre}"><span>${nombre}</span>`;
+    
+    pDiv.addEventListener('click',()=>{
+      piezasDiv.innerHTML = '';
+      const imgGrande = document.createElement('img');
+      imgGrande.src = imgURL;
+      imgGrande.alt = nombre;
+      imgGrande.classList.add('expanded');
+      // toggle al volver a hacer click
+      imgGrande.addEventListener('click', ()=> imgGrande.classList.toggle('expanded'));
+      piezasDiv.appendChild(imgGrande);
+      imgGrande.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+    
     partesDiv.appendChild(pDiv);
   });
 }
 </script>
-
-<iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d468.4577789956665!2d-98.78873246926877!3d20.064585698973442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1a0fe269e6bdf%3A0xb9833f6f844772c3!2sBlvd.%20Sta.%20Catarina%2059-61%2C%20Hacienda%20la%20Herradura%2C%2042082%20Pachuca%20de%20Soto%2C%20Hgo.!5e0!3m2!1ses-419!2smx!4v1763491012177!5m2!1ses-419!2smx" 
-  width="80%" 
-  height="450" 
-  style="border:0;" 
-  allowfullscreen="" 
-  loading="lazy" 
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
 
 </body>
 </html>
