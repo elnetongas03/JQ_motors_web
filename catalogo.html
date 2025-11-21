@@ -21,15 +21,18 @@ body{
   color:#eee;
   scroll-behavior:smooth;
 }
+
+/* Navbar */
 .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
   background:var(--guinda);
-  padding:10px 18px;
+  padding:10px 16px;
   position:sticky;
   top:0;
   z-index:1000;
+  flex-wrap:wrap;
 }
 .logo{display:flex;align-items:center;gap:12px;}
 .logo img{height:44px;}
@@ -37,10 +40,10 @@ body{
 .navbar nav ul{
   list-style:none;
   display:flex;
-  gap:14px;
+  gap:10px;
   margin:0;
   padding:0;
-  align-items:center;
+  flex-wrap:wrap;
 }
 .navbar a{
   color:#fff;
@@ -51,7 +54,9 @@ body{
 .navbar a:hover,.navbar a.active{
   border-bottom:2px solid #fff;
 }
-.catalogo{padding:28px 16px;}
+
+/* Catalogo */
+.catalogo{padding:20px 16px;}
 .catalogo h2{max-width:1200px;margin:0 auto 12px;color:var(--guinda-2);}
 .container{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;}
 .marcas{
@@ -73,6 +78,7 @@ body{
   background:var(--guinda);
   transform:translateY(-2px);
 }
+
 .scroll-submodelos{
   display:flex;
   overflow-x:auto;
@@ -97,9 +103,10 @@ body{
   background:var(--guinda-2);
   transform:translateY(-2px);
 }
+
 .grid-partes{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
   gap:12px;
   margin-top:16px;
 }
@@ -116,7 +123,7 @@ body{
 }
 .pieza img{
   width:100%;
-  height:160px;
+  height:120px;
   object-fit:cover;
   border-radius:6px;
   margin-top:6px;
@@ -131,15 +138,18 @@ body{
   transform:translateY(-6px);
   box-shadow:0 10px 30px rgba(0,0,0,.7);
 }
+
+/* Imagen expandida */
 .grid-piezas{
   display:flex;
   justify-content:center;
   align-items:center;
   margin-top:16px;
+  flex-wrap:wrap;
 }
 .grid-piezas img{
-  width:300px;
-  max-width:90%;
+  width:80%;
+  max-width:400px;
   height:auto;
   object-fit:contain;
   border-radius:6px;
@@ -148,7 +158,27 @@ body{
   cursor:pointer;
 }
 .grid-piezas img.expanded{
-  transform: scale(1.5);
+  transform: scale(2);
+  z-index:1000;
+  position:relative;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .navbar nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .grid-partes{
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  }
+  .pieza img{height:100px;}
+}
+@media(max-width:480px){
+  .grid-partes{
+    grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  }
+  .pieza img{height:80px;}
 }
 </style>
 </head>
@@ -165,7 +195,6 @@ body{
       <li><a href="index.html">Inicio</a></li>
       <li><a href="promociones.html">Promociones</a></li>
       <li><a href="pizarron.html">Pizarrón</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
     </ul>
   </nav>
 </header>
@@ -227,7 +256,7 @@ const codigoImagen = {
   "EVAP":"AV01.png","FRENO_DE_DISCO_DELANTERO":"ER_1.png","FRENO_DE_DISCO_TRASERO":"ER_1.png",
   "HORQUILLA_DELANTERA":"RR_1.png","HORQUILLA_OSCILANTE_Y_AMORTIGUADOR":"RO_1.png",
   "MANILLAR":"NI01.png","PARADOR_LATERAL":"RA_1.png","PEDAL_DE_CAMBIOS":"DO_1.png",
-  "PEDAL_DE_FRENO":"DN_1.png","POSAPIES_Y_SOPORTES":"SE_1.png","RADIADOR":"DI1.png",
+  "PEDAL_DE_FRENO":"DN_1.png","POSAPIES_Y_SOPORTES":"SE_1.png","RADIADOR":"DI01.png",
   "SALPICADERA_DELANTERA":"LR_1.png","SOPORTE_DE_MOTOR_CHASIS":"PI_1.png","STATOR":"AT01.png",
   "TAMBOR":"MB01.png","TANQUE_DE_GASOLINA_Y_CERRADURA":"NR_1.png","TRANSMICION":"AN01.png",
   "VALVULAS":"LA_1.png"
@@ -280,14 +309,15 @@ function cargarPartes(){
     const imgURL = nivel3CarpetaURL + carpeta + '/' + codigoImagen[carpeta];
     pDiv.innerHTML = `<img src="${imgURL}" alt="${nombre}"><span>${nombre}</span>`;
     
+    // click para expandir imagen
     pDiv.addEventListener('click',()=>{
-      piezasDiv.innerHTML = '';
+      piezasDiv.innerHTML='';
       const imgGrande = document.createElement('img');
       imgGrande.src = imgURL;
       imgGrande.alt = nombre;
       imgGrande.classList.add('expanded');
-      // toggle al volver a hacer click
-      imgGrande.addEventListener('click', ()=> imgGrande.classList.toggle('expanded'));
+      // click para cerrar la imagen
+      imgGrande.addEventListener('click',()=> imgGrande.classList.toggle('expanded'));
       piezasDiv.appendChild(imgGrande);
       imgGrande.scrollIntoView({behavior:'smooth', block:'center'});
     });
